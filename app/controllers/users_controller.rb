@@ -3,10 +3,11 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
+    authorize(current_user)
   end
 
   def show
-    authorize(@user)
+    redirect_to root_path, alert: "Access denied."  unless authorize(@user)
   end
 
   private
