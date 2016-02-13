@@ -50,6 +50,8 @@ gem 'pg'
 gem 'pundit'
 
 group :development do
+  gem 'pry'
+  
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_apps_pages'
