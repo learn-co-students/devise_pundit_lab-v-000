@@ -1,0 +1,16 @@
+class UsersController < ApplicationController
+
+  def index
+    @users = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
+    if authorize @user
+      @user = current_user
+    else
+      raise Pundit::NotAuthorizedError, "Access denied."
+    end
+  end
+
+end
