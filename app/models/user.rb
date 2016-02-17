@@ -3,7 +3,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable, :confirmable,
   #        :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :validatable
   has_many :notes
   has_many :viewers
   has_many :readable, through: :viewers, source: :note
+
+  enum role: [:normal, :vip, :admin]
 end
