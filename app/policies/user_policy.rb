@@ -1,4 +1,4 @@
-class UserPolicy
+class UserPolicy < ApplicationPolicy
 
   def index?
     user.admin?
@@ -13,7 +13,7 @@ class UserPolicy
   end
 
   def destroy?
-    record != user || user.admin?
+    record != user && user.admin?
   end
 
 
