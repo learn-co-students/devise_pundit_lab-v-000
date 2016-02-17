@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+
   
   def new
     
