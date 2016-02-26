@@ -18,6 +18,7 @@ development:
   encoding: unicode
   database: devise_pundit_lab_development
   pool:     5
+  password: "test"
 
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -44,6 +45,7 @@ test:
   encoding: unicode
   database: devise_pundit_lab_test
   pool:     5
+  password: "test"
 
 
 production:
