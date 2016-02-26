@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :users, only: [:index, :show]
+  get 'pages/about', to: 'application#about'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'notes#index'
+  root to: 'notes#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :notes
 
   # Example resource route with options:
   #   resources :products do

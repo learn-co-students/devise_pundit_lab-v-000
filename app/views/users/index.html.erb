@@ -1,0 +1,3 @@
+<% if policy(@user).index? %>
+  <%= @user.email %>
+<% end %>
