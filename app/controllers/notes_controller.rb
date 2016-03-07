@@ -5,9 +5,11 @@ class NotesController < ApplicationController
   end
   
   def create
-    note = Note.new(note_params)
-    note.user = current_user
-    note.save!
+    @note = Note.new(note_params)
+    authorize @note
+    @note.user = current_user
+    @note.save!
+    
     redirect_to '/'
   end
 
