@@ -18,6 +18,10 @@ class NotePolicy < ApplicationPolicy
 		user.admin? || record.try(:user) == user
 	end
 
+  def edit?
+    user.admin? || record.try(:user) == user
+  end
+
 	def update?
 		user.admin? || record.try(:user) == user
 	end
@@ -25,6 +29,8 @@ class NotePolicy < ApplicationPolicy
 	def destroy?
 		user.admin? || record.try(:user) == user
 	end
+
+
 
 
 

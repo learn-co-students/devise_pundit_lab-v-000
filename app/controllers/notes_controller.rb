@@ -16,7 +16,7 @@ class NotesController < ApplicationController
     @note.save!
     authorize @note
     
-    redirect_to '/'
+    redirect_to @note
   end
 
   def update
