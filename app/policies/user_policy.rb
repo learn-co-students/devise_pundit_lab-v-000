@@ -1,14 +1,7 @@
 class UserPolicy < ApplicationPolicy
 
-  def update?
-  end
-
-  def create?
-
-  end
-
-  def delete?
-
+  def show?
+    user.admin? || record == user
   end
 
 end
