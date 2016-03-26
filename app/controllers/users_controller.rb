@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+
   def index
     
   end
@@ -14,7 +15,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    
+    if current_user.id != params[:id].to_i #change this to find user
+      flash.alert = "Access denied."
+      redirect_to root_path
+    end
   end
 
   def edit
@@ -29,7 +33,9 @@ class UsersController < ApplicationController
     
   end
 
-  private
+
+
+
 
   # def user_params
   #   params.require(:user).permit(:)
