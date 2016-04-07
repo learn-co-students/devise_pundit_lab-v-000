@@ -12,6 +12,8 @@ class NotesController < ApplicationController
   end
 
   def update
+    @note = Note.find(params[:id])
+    authorize @note
     @note.update(note_params)
     redirect_to '/'    
   end
@@ -21,13 +23,12 @@ class NotesController < ApplicationController
   end
   
   def show
+    @note = Note.find(params[:id])
+    authorize @note
   end
 
   def index
-    @notes = Note.none
-    if current_user
-      @notes = current_user.readable
-    end
+    @notes = Note.all
   end
 
   private
