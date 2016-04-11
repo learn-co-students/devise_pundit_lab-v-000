@@ -2,7 +2,7 @@
 
 ## Objectives
 
-We're going to learn how to integrate Pundit into a Rails application.
+We're going to learn how to integrate [CanCan] into a Rails application.
 For our data model, we're going to return to our secret notes message board.
 
 ## Data model
@@ -48,4 +48,3 @@ Once your policy spec is written and passes, write feature specs for creating, r
 
 [Pundit]: https://github.com/elabs/pundit
 [CanCanCan]: https://github.com/CanCanCommunity/cancancan
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/devise_pundit_lab'>Devise and Pundit Lab</a> on Learn.co and start learning to code for free.</p>
