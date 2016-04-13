@@ -1,7 +1,7 @@
 <div class=note>
   <div class=note-content>
-    <%= note.content %>
-  </div>
+    <%= note.content %> <%= link_to("Edit", edit_note_path(note))
+ %>  </div>
   <div class=note-author>
     <%= note.user.name %>
   </div>
