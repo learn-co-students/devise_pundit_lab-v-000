@@ -7,8 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+  <div class='error'>
+  <%flash.each do |k,v| %>
+    <p style="color:red;"><%= v %></p>
+  <% end%>
+  </div>
   
 <%= yield %>
+
+
+<% if @current_user.nil? %>
+  <%= link_to "Sign in", new_user_session_path %><br>
+  <%= link_to "Sign up", new_user_registration_path %><br>
+<% else %>
+  <%= link_to "Sign out", destroy_user_session_path(current_user), method: :delete %><br>
+<%end%>
+
+  <%= link_to "Home", root_path %>
+
 
 </body>
 </html>
