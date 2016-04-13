@@ -46,4 +46,16 @@ nav {
   a:hover {
     color: $link-hover-color;
   }
+  .right {
+    float: right;
+  }
+}
+
+.note {
+  margin-bottom: 5px;
+}
+
+textarea#note_visible_to {
+    height: 60px; 
+    width: 300px;
 }
