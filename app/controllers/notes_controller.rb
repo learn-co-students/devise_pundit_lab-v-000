@@ -1,5 +1,8 @@
 class NotesController < ApplicationController
   
+  def index
+  end
+
   def new
     
   end
@@ -21,6 +24,7 @@ class NotesController < ApplicationController
   end
   
   def show
+    @note= Note.find_by(id: params[:id])
   end
 
   def index
