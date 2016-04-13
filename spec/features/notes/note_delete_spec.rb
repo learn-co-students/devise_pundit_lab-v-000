@@ -8,6 +8,7 @@ feature 'Note delete', :devise do
   end
 
   scenario 'user can delete notes they created', js: true do
+    skip 'skip a slow test'
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)
     new_note = user.notes.create(content: 'my new note')
