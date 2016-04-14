@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 
   root 'notes#index'
+  get 'pages/about' => 'users#about'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
