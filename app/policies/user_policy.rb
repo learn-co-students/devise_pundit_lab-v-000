@@ -1,17 +1,14 @@
 class UserPolicy < ApplicationPolicy
 
   def index?
-    user.admin?
+    user.admin? || user.vip?
   end
 
 
   def show?
-    user.admin? || user == @record
+    user.admin? || user.vip? || user == @record
   end
 
-  def edit?
-    user.admin?
-  end
 
   def update?
     user.admin?

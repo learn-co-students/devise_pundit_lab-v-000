@@ -1,10 +1,14 @@
 class NotesController < ApplicationController
-  
+  before_action :authenticate_user!
+
+
   def index
+    @notes=Note.all
+    redirect_to user_path(current_user) if NotesPolicy.new(current_user, @notes).index?
   end
 
   def new
-    
+    @note=Note.new
   end
   
   def create

@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user! 
   before_action :set_user, except: [:index, :new]
-  # before_action :authorize, except: [:index, :new]
+  
 
 
   def index
-# byebug
     @users=User.all
     authorize @users
   end
@@ -20,8 +19,8 @@ class UsersController < ApplicationController
   end
 
   def show
-# byebug
     redirect_to :back, alert: "Access denied." unless UserPolicy.new(current_user, @user).show?
+    # @user=User.find_by(id: params[:id])
   end
 
   def edit

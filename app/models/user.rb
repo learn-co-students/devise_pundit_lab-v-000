@@ -7,14 +7,10 @@ class User < ActiveRecord::Base
   has_many :viewers
   has_many :readable, through: :viewers, source: :note
 
-  enum role: [:user, :admin]
+  enum role: [:user, :vip, :admin]
 
   before_create :set_default_role
 
-
-  def guest?
-    !self.persisted?
-  end
 
   def set_default_role
     self.role ||= :user
