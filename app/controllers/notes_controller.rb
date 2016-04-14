@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :authorize_user!
+  before_action :set_note, except: [:index, :new]
 
 
   def index
@@ -42,5 +43,9 @@ class NotesController < ApplicationController
 
   def note_params
     params.require(:note).permit(:content, :visible_to)
+  end
+
+  def set_note
+    @note=Note.find_by(id: params[:id])
   end
 end

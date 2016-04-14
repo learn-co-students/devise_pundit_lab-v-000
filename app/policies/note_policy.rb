@@ -6,7 +6,6 @@ class NotePolicy < ApplicationPolicy
   end
 
   def show?
-# byebug
     privileges? || record.user == user || record.readers.include?(user)
   end
 

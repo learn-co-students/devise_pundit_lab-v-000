@@ -2,6 +2,6 @@
   <%= f.label :content %>
   <%= f.text_field :content %>
   <%= f.label :visible_to %>
-  <%= f.text_field :visible_to %>
+  <%= f.collection_select :visible_to, User.all, :name, :name, include_blank: true %>
   <%= f.submit 'save' %>
 <% end %>

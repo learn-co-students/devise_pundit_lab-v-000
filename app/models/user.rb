@@ -9,10 +9,14 @@ class User < ActiveRecord::Base
 
   enum role: [:user, :vip, :admin]
 
-  before_create :set_default_role
+  before_create :set_default_role, :user_name
 
 
   def set_default_role
     self.role ||= :user
+  end
+
+  def user_name
+    self.name ||= self.email    
   end
 end
