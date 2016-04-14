@@ -1,42 +1,45 @@
 class UsersController < ApplicationController
   before_action :authenticate_user! 
-  # before_action :admin_only, except: :show
+  before_action :set_user, except: [:index, :new]
+  # before_action :authorize, except: [:index, :new]
+
 
   def index
 # byebug
-    @current_user=current_user
     @users=User.all
+    authorize @users
   end
 
   def new
+    @user = User.new
+    authorize @user
   end
 
   def create
+
   end
 
   def show
 # byebug
-    @user = User.find_by(id: params[:id]) 
-
-
-
+    redirect_to :back, alert: "Access denied." unless UserPolicy.new(current_user, @user).show?
   end
 
   def edit
+    authorize @user
   end
 
   def update
   end
 
   def destroy
+    authorize @user
   end
 
-  private 
-    # def admin_only
-    #   unless current_user.admin?
-    #     redirect_to root_path, :alert => "Access denied."
-    #   end
-    # end
+  private
+    def set_user
+      @user=User.find_by(id: params[:id])
+    end
+
+
+
 end
-
-
