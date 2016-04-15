@@ -3,7 +3,6 @@ class VisitorsController < ApplicationController
 
   private
     def check_login
-# byebug
       if signed_in?
         redirect_to notes_path
       end

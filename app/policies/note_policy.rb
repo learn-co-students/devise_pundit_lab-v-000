@@ -10,7 +10,7 @@ class NotePolicy < ApplicationPolicy
   end
 
   def create?
-    user.persisted?
+    !!user || user.persisted?
   end
 
   def update?
@@ -19,6 +19,17 @@ class NotePolicy < ApplicationPolicy
 
   def destroy?
     user.admin? || record.user == user
+  end
+
+  class Scope < Scope
+    def resolve
+      if user.admin? || user.vip?
+        scope.all
+      else
+        scope.where(user_id: user.id) 
+        scope.includes(:readable).where(id: user.id)
+      end
+    end
   end
 
   private

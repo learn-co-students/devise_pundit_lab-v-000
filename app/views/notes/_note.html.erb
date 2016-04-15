@@ -1,8 +1,12 @@
+
+
 <div class=note>
-  <div class=note-content>
-    <%= note.content %>
+  <ul>
+    <div class=note-content>
+      <li><h2><%= note.content %></h2></li>
+    </div>
+    <div class=note-author>
+      <p>--written by <%= note.user.name %> to <%= note.visible_to %></p>
   </div>
-  <div class=note-author>
-    <%= note.user.name %>
-  </div>
+</ul>
 </div>

@@ -1,11 +1,12 @@
 class NotesController < ApplicationController
-  before_action :authenticate_user!, :authorize_user!
+  before_action :authenticate_user! 
+  before_action :set_current, except: [:index]
   before_action :set_note, except: [:index, :new]
 
 
   def index
+    redirect_to user_path(current_user) if current_user.user? 
     @notes=Note.all
-    redirect_to user_path(current_user) if NotesPolicy.new(current_user, @notes).index?
   end
 
   def new
@@ -13,10 +14,11 @@ class NotesController < ApplicationController
   end
   
   def create
+
     note = Note.new(note_params)
     note.user = current_user
     note.save!
-    redirect_to '/'
+    redirect_to note_path(note)
   end
 
   def update
@@ -32,12 +34,6 @@ class NotesController < ApplicationController
     @note= Note.find_by(id: params[:id])
   end
 
-  def index
-    @notes = Note.none
-    if current_user
-      @notes = current_user.readable
-    end
-  end
 
   private
 
@@ -48,4 +44,11 @@ class NotesController < ApplicationController
   def set_note
     @note=Note.find_by(id: params[:id])
   end
+
+  def set_current
+    @current_user=current_user
+  end
+
+
+
 end

@@ -1,9 +1,9 @@
 def build_notes
   let (:guest) {User.new(email: "guest@email.com")}
-  let (:current_user) { FactoryGirl.build_stubbed :user}
-  let (:other_user) { FactoryGirl.build_stubbed :user}
-  let (:admin) { FactoryGirl.build_stubbed :user, :admin }
-  let (:vip) {FactoryGirl.build_stubbed :user, :vip}
+  let (:one_user) { FactoryGirl.create :user}
+  let (:another_user) { FactoryGirl.create :user}
+  let (:admin) { FactoryGirl.create :user, :admin }
+  let (:vip) {FactoryGirl.create :user, :vip}
 
   let (:current_note) {Note.create(content: "current user's note", user: current_user)}
   let (:other_note) {Note.create(content: "other user's note", user: other_user)}

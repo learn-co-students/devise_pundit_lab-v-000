@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
 
   def index
+    
     @users=User.all
     authorize @users
   end
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
 
   def show
     redirect_to :back, alert: "Access denied." unless UserPolicy.new(current_user, @user).show?
-    # @user=User.find_by(id: params[:id])
+
   end
 
   def edit
