@@ -5,8 +5,6 @@
 
 <%= link_to "Sign up", new_user_registration_path %>
 
-<% if @current_user %>
-  <%= link_to "Home", user_path(@current_user) %> 
-  <%= link_to "What's up, #{@current_user.name}?", user_path(@current_user), :class=>"whassup" %>
-<% end %>
+<%= link_to "Home", root_path %>
+
 <br></br>

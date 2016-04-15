@@ -10,7 +10,8 @@ class NotePolicy < ApplicationPolicy
   end
 
   def create?
-    !!user || user.persisted?
+
+    !!user.id
   end
 
   def update?

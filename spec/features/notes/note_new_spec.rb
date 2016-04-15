@@ -26,7 +26,7 @@ feature "Note new", :devise do
 
   scenario 'Notes are visible to owner-specified readers' do
     test_user=User.create(email: "test@email.com", password: "testtest", name: "test")
-  # byebug 
+   
     login_as(another_user)
     visit new_note_path
     fill_in "note_content", with: "other spec content"
