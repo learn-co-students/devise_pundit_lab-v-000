@@ -11,10 +11,10 @@ class NotesController < ApplicationController
 
   def new
     @note=Note.new
+    authorize @note
   end
   
   def create
-
     note = Note.new(note_params)
     note.user = current_user
     note.save!
@@ -23,32 +23,37 @@ class NotesController < ApplicationController
 
   def update
     @note.update(note_params)
-    redirect_to '/'    
+    authorize @note
+    redirect_to note_path(@note)    
   end
   
   def edit
-    @note = Note.find(params[:id])
+    authorize @note
   end
   
   def show
-    @note= Note.find_by(id: params[:id])
+    authorize @note
+  end
+
+  def destroy
+    authorize @note
+    @note.destroy
+    redirect_to root_path
   end
 
 
   private
 
-  def note_params
-    params.require(:note).permit(:content, :visible_to)
-  end
+    def note_params
+      params.require(:note).permit(:content, :visible_to)
+    end
 
-  def set_note
-    @note=Note.find_by(id: params[:id])
-  end
+    def set_note
+      @note=Note.find_by(id: params[:id])
+    end
 
-  def set_current
-    @current_user=current_user
-  end
-
-
+    def set_current
+      @current_user=current_user
+    end
 
 end

@@ -1,5 +1,3 @@
-
-
 <div class=note>
   <ul>
     <div class=note-content>
@@ -7,6 +5,16 @@
     </div>
     <div class=note-author>
       <p>--written by <%= note.user.name %> to <%= note.visible_to %></p>
-  </div>
-</ul>
+    </div>
+    <div class=note-edit-destroy>
+      <% if policy(note).update? %>
+        <%= link_to "Edit note", edit_note_path(note) %>
+      <% end %>
+      <% if policy(note).destroy? %>
+        <%= button_to "Delete", {action: "destroy", id: note.id} %>
+      <% end %>
+    </div>
+  </ul>
 </div>
+
+

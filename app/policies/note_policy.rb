@@ -10,12 +10,11 @@ class NotePolicy < ApplicationPolicy
   end
 
   def create?
-
     !!user.id
   end
 
   def update?
-    user.admin?
+    user.admin? || record.user == user
   end
 
   def destroy?

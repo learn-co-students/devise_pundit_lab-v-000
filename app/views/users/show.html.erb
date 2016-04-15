@@ -8,5 +8,6 @@
 
 <h3>Here's yer shit:</h3>
 
-
-<%= render @user.readable %>
+<% @user.readable.each do |n| %>
+  <%= render 'notes/note', note: n %>
+<% end %>

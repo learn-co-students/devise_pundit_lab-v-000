@@ -9,6 +9,69 @@ feature 'Note show page', :devise do
     Warden.test_reset!
   end
 
+  scenario 'Shows author and readers' do
+    test_user=one_user
+    test_note=one_note
+    another_note.readers << test_user
+    another_note.save
+    login_as(test_user)
+    visit note_path(another_note)
+    expect(page).to have_content(test_user.name)
+    expect(page).to have_content(another_user.name)
+  end
+
+
+  scenario 'Shows notes written by or to user' do
+    test_user=one_user
+    test_note=one_note
+    another_note.readers << test_user
+    another_note.save
+    login_as(test_user)
+    visit note_path(another_note)
+    expect(page).to have_content("other user's note")
+  end
+
+  scenario 'users can see links to edit their posts' do
+    test_user=User.create(email: "test@email.com", password: "testtest", name: "test")
+    test_note=test_user.notes.build(content: "test note")
+    test_note.save
+    login_as(test_user)
+    visit note_path(test_note)
+    expect(page).to have_link('Edit note')
+
+  end
+
+  scenario 'vip can see any note' do
+    login_as(vip)
+    visit note_path(one_note)
+    expect(page).to have_content("current user's note")
+  end
+
+  scenario 'vip cannot edit other user notes' do
+    login_as(vip)
+    visit note_path(one_note)
+    expect(page).not_to have_link("Edit note")
+  end 
+
+  scenario 'admins can see and edit any post' do
+    login_as(admin)
+    visit note_path(one_note)
+    expect(page).to have_content(one_note.content)
+    expect(page).to have_link("Edit note")
+  end
+
+  scenario 'only admins can delete a post' do
+    login_as(admin)
+    visit note_path(one_note)
+    expect(page).to have_button("Delete")
+
+    login_as(vip)
+    visit note_path(one_note)
+    expect(page).not_to have_button("Delete")    
+  end
+  
+
+
 
 
   # # Scenario: User sees own profile

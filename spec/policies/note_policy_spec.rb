@@ -1,18 +1,20 @@
 describe NotePolicy do
   subject { NotePolicy }
 
-  let (:guest) {User.new(email: "guest@email.com")}
-  let (:current_user) { FactoryGirl.build_stubbed :user}
-  let (:other_user) { FactoryGirl.build_stubbed :user}
-  let (:admin) { FactoryGirl.build_stubbed :user, :admin }
-  let (:vip) {FactoryGirl.build_stubbed :user, :vip}
+  build_notes
 
-  let (:current_note) {Note.create(content: "current user's note", user: current_user)}
-  let (:other_note) {Note.create(content: "other user's note", user: other_user)}
-  let (:vipnote1) {Note.create(content: "vip's first note", user: vip)}
-  let (:vipnote2) {Note.create(content: "vip's second note", user: vip)}
-  let (:adminnote1) {Note.create(content: "admin's first note", user: admin)}
-  let (:adminnote1) {Note.create(content: "admin's first note", user: admin)}
+  # let (:guest) {User.new(email: "guest@email.com")}
+  # let (:one_user) { FactoryGirl.build_stubbed :user}
+  # let (:another_user) { FactoryGirl.build_stubbed :user}
+  # let (:admin) { FactoryGirl.build_stubbed :user, :admin }
+  # let (:vip) {FactoryGirl.build_stubbed :user, :vip}
+
+  # let (:one_note) {Note.create(content: "current user's note", user: one_user)}
+  # let (:another_note) {Note.create(content: "other user's note", user: another_user)}
+  # let (:vipnote1) {Note.create(content: "vip's first note", user: vip)}
+  # let (:vipnote2) {Note.create(content: "vip's second note", user: vip)}
+  # let (:adminnote1) {Note.create(content: "admin's first note", user: admin)}
+  # let (:adminnote1) {Note.create(content: "admin's first note", user: admin)}
  ##each of these users writes 1 note w/no other readers
  ##VIP has second note with current as reader 
  ##Admin has second note with other as reader
@@ -53,47 +55,52 @@ describe NotePolicy do
   permissions :show? do
 
     it "denies access if not signed in" do
-      expect(subject).not_to permit(guest, current_note)
+      expect(subject).not_to permit(guest, one_note)
     end
 
     it "shows users their notes and readables" do 
-      vipnote2.readers << current_user
+      vipnote2.readers << one_user
 
-      expect(subject).to permit(current_user, current_note)
-      expect(subject).to permit(current_user, vipnote2)
+      expect(subject).to permit(one_user, one_note)
+      expect(subject).to permit(one_user, vipnote2)
     end
 
     it "doesn't let users read notes that aren't readable to them" do
-# byebug
-      expect(subject).not_to permit(other_user, vipnote2)
-      
-      expect(subject).not_to permit(other_user, current_note)
+      expect(subject).not_to permit(another_user, vipnote2)
+      expect(subject).not_to permit(another_user, one_note)
     end
 
     it "lets vips see all notes" do
-      expect(subject).to permit(vip, other_note)
-      expect(subject).to permit(vip, current_note)
+      expect(subject).to permit(vip, another_note)
+      expect(subject).to permit(vip, one_note)
       expect(subject).to permit(vip, adminnote1)
     end
 
     it "lets admins see all notes" do
-      expect(subject).to permit(admin, other_note)
-      expect(subject).to permit(admin, current_note)
+      expect(subject).to permit(admin, another_note)
+      expect(subject).to permit(admin, one_note)
       expect(subject).to permit(admin, adminnote1)
     end
   end
 
 
   permissions :update? do
-    it "prevents updates if not an admin" do
-      expect(subject).not_to permit(guest)
-      expect(subject).not_to permit(current_user)
-      expect(subject).not_to permit(other_user)
-      expect(subject).not_to permit(vip)
+    it "prevents updates if not the owner or admin" do
+      expect(subject).not_to permit(guest, one_note)
+      expect(subject).to permit(one_user, one_note)
+      expect(subject).not_to permit(one_user, another_note)
+      expect(subject).to permit(another_user, another_note)
+      expect(subject).not_to permit(another_user, vipnote1)
+      expect(subject).not_to permit(vip, one_note)
+      expect(subject).to permit(vip, vipnote2)
+
     end
 
     it "allows an admin to make updates" do
-      expect(subject).to permit(admin)
+      expect(subject).to permit(admin, vipnote2)
+      expect(subject).to permit(admin, vipnote1)
+      expect(subject).to permit(admin, one_note)
+      expect(subject).to permit(admin, another_note)
     end
 
   end
@@ -101,16 +108,16 @@ describe NotePolicy do
   permissions :destroy? do
     
     it "prevents non-admins from deleting notes they didn't write" do
-      expect(subject).not_to permit(current_user, vipnote2)
-      expect(subject).not_to permit(vip, other_note)
+      expect(subject).not_to permit(one_user, vipnote2)
+      expect(subject).not_to permit(vip, another_note)
     end
 
     it "allows users to delete their own notes" do
-      expect(subject).to permit(other_user, other_note)
+      expect(subject).to permit(another_user, another_note)
     end
 
     it "allows an admin to delete any note" do
-      expect(subject).to permit(admin, other_note)
+      expect(subject).to permit(admin, another_note)
     end
 
   end
