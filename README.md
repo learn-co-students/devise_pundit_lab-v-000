@@ -1,19 +1,13 @@
 # Devise Pundit Lab
 
-## Objectives
-
-We're going to learn how to integrate Pundit into a Rails application.
-For our data model, we're going to return to our secret notes message board.
-
-## Data model
-
-We're going to have Users, Notes, and a viewers join table, which gives users read access to notes.
+## Date Models
+Users, Notes, and a viewers join table, which gives users read access to notes.
 
 ## Instructions
 
 The lab comes with a Rails skeleton with Devise installed.
 
-3. Add a role enum to the user model.
+~3. Add a role enum to the user model.~
 4. Write a policy governing the User model. Ensure all policy specs pass.
 4. Add authentication and authorization filters to your users controller. Ensure that only administrators can update or destroy users.
 
