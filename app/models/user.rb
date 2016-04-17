@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
     self.role ||= :normal
   end
 
-  devise :authenticatable, :registerable, :validatable
+  # this is where you route helpers come from
+  devise :database_authenticatable, :registerable, :validatable
 
   has_many :notes
   has_many :viewers
