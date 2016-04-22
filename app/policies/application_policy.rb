@@ -1,2 +1,2 @@
-class ApplicationPolicy
+class ApplicationPolicy 
 end
