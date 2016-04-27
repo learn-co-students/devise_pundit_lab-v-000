@@ -39,6 +39,7 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry'
 end
 
 
@@ -49,7 +50,7 @@ gem 'pundit'
 gem 'sqlite3'
 
 group :development do
-  gem 'better_errors'
+  # gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
