@@ -3,4 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   include Pundit
   protect_from_forgery with: :exception
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  private
+
+  def user_not_authorized
+    flash[:warning] = "Access denied."
+    redirect_to(request.referrer || root_path)
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
+
 end

@@ -2,7 +2,7 @@
 class NotesController < ApplicationController
 
   def new
-    
+
   end
 
   def create
@@ -25,10 +25,12 @@ class NotesController < ApplicationController
   end
 
   def index
-    @notes = Note.none
+    @notes = Note.all
+    # binding.pry
+    @user = current_user
     if current_user
       @notes = current_user.readable
-      authorize @notes
+      #authorize @notes
     end
   end
 
