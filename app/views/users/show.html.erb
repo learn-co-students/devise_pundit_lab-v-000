@@ -1,0 +1,25 @@
+<h1>User Profile</h1>
+<h3>Your Information</h3>
+<ul>
+  <li><b>Name:</b> <%= @current_user.name %></li>
+  <li><b>Email:</b> <%= @current_user.email %></li>
+</ul>
+
+<% if @user.notes.any? %>
+  <h2>Notes</h2>
+  <% @user.notes.each do |post| %>
+    <div>
+      <%= note.content %>
+      <% if @user == @current_user || @current_user.moderator? || @current_user.admin? %>
+        <a href="/posts/<%= "#{post.id}" %>/edit">Edit</a>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @user == current_user %>
+  <%= form_for :post, url: notes_path do |f| %>
+    Content: <%= f.text_field :content %><br />
+    <%= f.submit %>
+  <% end %>
+<% end %>
