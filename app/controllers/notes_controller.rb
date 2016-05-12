@@ -7,12 +7,15 @@ class NotesController < ApplicationController
   def create
     note = Note.new(note_params)
     note.user = current_user
+    authorize note
+
     note.save!
     redirect_to '/'
   end
 
   def update
-    @note.update(note_params)
+    @note = Note.find(params[:id])
+    @note.update(permitted_attributes(@note))
     redirect_to '/'    
   end
   
@@ -27,6 +30,14 @@ class NotesController < ApplicationController
     @notes = Note.none
     if current_user
       @notes = current_user.readable
+    end
+  end
+
+  def destroy
+    @note = Note.find(params[:id])
+    if authorize @note
+      @note.delete
+      redirect_to "/"
     end
   end
 
