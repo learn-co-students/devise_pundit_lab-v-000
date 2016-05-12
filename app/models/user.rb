@@ -8,12 +8,4 @@ class User < ActiveRecord::Base
 
   enum role: [:normal, :moderator, :admin]
 
-  def guest?
-    persisted?
-  end
-
-  private
-  def set_default_role
-    self.role ||= :user
-  end
 end

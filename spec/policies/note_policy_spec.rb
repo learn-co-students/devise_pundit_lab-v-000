@@ -3,8 +3,11 @@ describe NotePolicy do
 
   let (:current_user) { FactoryGirl.build_stubbed :user }
   let (:other_user) { FactoryGirl.build_stubbed :user }
+  let (:forbidden_user) { FactoryGirl.build_stubbed :user }
+  let (:allowed_user) { FactoryGirl.build_stubbed :user }
   let (:admin) { FactoryGirl.build_stubbed :user, :admin }
-  let (:note) { FactoryGirl.build_stubbed :note }
+  let (:moderator) { FactoryGirl.build_stubbed :user, :moderator }
+  let (:note) { FactoryGirl.build_stubbed(:note, user: current_user) }
 
   permissions :create? do
     it "allows user to create notes owned by them" do
@@ -15,44 +18,42 @@ describe NotePolicy do
     end
   end
 
-  permissions :update? do
-    it "allows a user to edit their own notes" do
-      expect(subject).to permit(note, current_user)
+  permissions :update?, :edit?, :destroy? do
+    it "allows a user to edit, update, and destroy their own notes" do
+      expect(subject).to permit(current_user, note)
     end
-    it "allows an admin to make updates on any note" do
+    it "allows an admin to make edits, updates, and destroy on any note" do
       expect(subject).to permit(admin)
+    end
+    it 'should not allow a user to make edits, updates, and destroy notes they do not own' do
+      expect(subject).not_to permit(other_user, note)
     end
   end
 
-  permissions :destroy? do
-    it "allows user to delete their own notes" do
-      expect(subject).to permit(note, current_user)
+  permissions :index? do
+    it "allows user to view their own notes" do
+      expect(subject).to permit(current_user)
     end
-    it "allows an admin to delete any note" do
+    it "allows admin to view all notes" do
       expect(subject).to permit(admin)
+    end
+    it "allows moderator to view all notes" do
+      expect(subject).to permit(moderator)
     end
   end
 
-  # permissions :index? do
-  #   it "denies access if not an admin" do
-  #     expect(NotePolicy).not_to permit(current_user)
-  #   end
-  #   it "allows access for an admin" do
-  #     expect(NotePolicy).to permit(admin)
-  #   end
-  # end
-
-  # permissions :show? do
-  #   it "prevents other users from seeing your profile" do
-  #     expect(subject).not_to permit(current_user, other_user)
-  #   end
-  #   it "allows you to see your own profile" do
-  #     expect(subject).to permit(current_user, current_user)
-  #   end
-  #   it "allows an admin to see any profile" do
-  #     expect(subject).to permit(admin)
-  #   end
-  # end
+  permissions :show? do
+    it "prevents users from viewing notes they are not allowed to read" do
+      expect(subject).not_to permit(forbidden_user, note)
+    end
+    it "allows you to see your own note" do
+      expect(subject).to permit(current_user, note)
+    end
+    # can't figure out how to write this test
+    # it "allows you to see notes you are a viewer of" do
+    #   expect(subject).to permit(allowed_user, note)
+    # end
+  end
 
 
 
