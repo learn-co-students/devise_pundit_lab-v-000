@@ -1,0 +1,13 @@
+
+<% if @user %>
+  <h1><%=@user.name%></h1>
+  <h2><%=@user.email%></h2>
+<% else %>
+  <h1>Show User</h1>
+<% end %>
+
+<h3>Here's yer shit:</h3>
+
+<% @user.readable.each do |n| %>
+  <%= render 'notes/note', note: n %>
+<% end %>

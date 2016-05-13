@@ -1,0 +1,14 @@
+<h1>Users#index</h1>
+
+<% if @current_user %>
+  <p>Me: <%=@current_user.email%></p>
+    <% if @current_user.admin? %>
+      <ul>
+        <% @users.each do |u| %>
+          <li><%= u.email %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>(Only admins can see everyone)</p>
+    <% end %>
+<% end %>
