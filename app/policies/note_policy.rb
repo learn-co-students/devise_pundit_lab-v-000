@@ -7,7 +7,7 @@ class NotePolicy < ApplicationPolicy
   # end
 
   def create?
-    user.admin? || user
+    user.role != "moderator" && user.persisted?
   end
 
   def update?
@@ -23,6 +23,17 @@ class NotePolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.moderator? || record.try(:user) == user || record.try(:visible_to).include?(user.name)
+    user.admin? || user.moderator? || record.try(:user) == user || user.persisted? && record.try(:visible_to).include?(user.name)
   end
+
+  class Scope < Scope
+     def resolve
+       if user.admin? || user.vip?
+         scope.all
+       else
+         scope.where(user_id: user.id) 
+         scope.includes(:readable).where(id: user.id)
+       end
+     end
+   end
 end

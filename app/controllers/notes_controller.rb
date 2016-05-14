@@ -1,16 +1,16 @@
 class NotesController < ApplicationController
   after_action :verify_authorized, except: [:index]
+  before_action :authenticate_user!, except: [:index]
 
   def new
     
   end
   
   def create
-    note = Note.new(note_params)
-    note.user = current_user
-    authorize note
-
-    note.save!
+    @note = current_user.notes.build(note_params)
+    if authorize @note
+      @note.save
+    end
     redirect_to '/'
   end
 
