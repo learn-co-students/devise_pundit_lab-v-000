@@ -2,9 +2,11 @@ include Warden::Test::Helpers
 Warden.test_mode!
 
 # Feature: User index page
-#   As a user
+#   As an ADMIN only, right? not just user.
 #   I want to see a list of users
 #   So I can see who has registered
+#   
+#   This is unclear in the test. Is the index page for users to see everyone, or for admins?
 feature 'User index page', :devise do
 
   after(:each) do
@@ -17,6 +19,7 @@ feature 'User index page', :devise do
   #   Then I see my own email address
   scenario 'user sees own email address' do
     user = FactoryGirl.create(:user, :admin)
+    #So a user here is an admin, not just a low-permission user...
     login_as(user, scope: :user)
     visit users_path
     expect(page).to have_content user.email
