@@ -13,22 +13,30 @@ We're going to have Users, Notes, and a viewers join table, which gives users re
 
 The lab comes with a Rails skeleton with Devise installed.
 
-3. Add a role enum to the user model.
-4. Write a policy governing the User model. Ensure all policy specs pass.
-4. Add authentication and authorization filters to your users controller. Ensure that only administrators can update or destroy users.
+1. Add a role enum to the user model.
+2. Write a policy governing the User model. Ensure all policy specs pass.
+3. Add authentication and authorization filters to your users controller. Ensure that only administrators can update or destroy users.
 
-We've included the relevant models/controllers and views from the CanCanCan lab so you don't have to rebuild them.  The data model is exactly the same, the only difference is that we're using Roles and Pundit to authorize actions rather than [CanCanCan].
+We've included the relevant models/controllers and views from the CanCanCan lab
+so you don't have to rebuild them.  The data model is exactly the same, the only
+difference is that we're using Roles and Pundit to authorize actions rather than
+[CanCanCan].
 
-#Note
-If you launch the app in the browser in its starting state it will error because some things the code depends on like current_user are no longer functional.  You'll need to start implementing devise to boot the app up in the browser.  Follow the tests.  
+# Note
+If you launch the app in the browser in its starting state it will error because
+some things the code depends on like current_user are no longer functional.
+You'll need to start implementing devise to boot the app up in the browser.
+Follow the tests.
 
 **Hints**
-*Some tests might require you adding the flash to a layout.
-*If you use all the devise modules you will run into problems.  Figure out which ones you need and include only those modules.
+* Some tests might require you adding the flash to a layout.
+* If you use all the devise modules you will run into problems.
+  Figure out which ones you need and include only those modules.
 
-Using the User policy as a guide, write a spec for the NotePolicy class, then write the NotePolicy class. You should ensure that:
+Using the User policy as a guide, write a spec for the NotePolicy class, then
+write the NotePolicy class. You should ensure that:
 
-  * Users can:
+  * Normal users can:
     * Create notes owned by them
     * Edit their own posts
     * Delete their own posts
@@ -36,7 +44,7 @@ Using the User policy as a guide, write a spec for the NotePolicy class, then wr
     * Remove viewers from their own posts
     * See notes they're viewers of
     * See their own notes
-  * VIPs can:
+  * Moderators can:
     * See all notes.
   * Admins can:
     * Perform any action on a user or a note.
