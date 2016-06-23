@@ -41,17 +41,6 @@ describe NotePolicy do
       expect(subject).to permit(current_user, note)
     end
 
-    it "allows a viewer to see your note" do
-      skip "not complete index action also?"
-      note.user = current_user
-      expect(subject).to permit(current_user, note)
-    end
-
-    it "prevents a non-viewer from seeing your note" do
-      skip "not complete"
-      note.user = current_user
-      expect(subject).to permit(current_user, note)
-    end
 
     it "allows an admin to see any note" do
       expect(subject).to permit(admin)
