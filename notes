@@ -1,0 +1,3 @@
+Add authentication and authorization filters to your users controller. Ensure that only administrators can update or destroy users.
+
+#### above not tested ### , but sign in and sign out is teste
