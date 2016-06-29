@@ -1,0 +1,5 @@
+<h1>Note</h1>
+<%= render @note %>
+  <% if policy(@note).update? %>
+     <%= link_to "Edit note", edit_note_path(@note) %>
+   <% end %>
