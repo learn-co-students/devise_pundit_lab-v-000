@@ -3,6 +3,8 @@ class Note < ActiveRecord::Base
   has_many :viewers  
   has_many :readers, through: :viewers, source: :user
 
+  validates :content, :presence => {:message => "Content can't be blank." }
+
   before_save :ensure_owner_can_read
   
   def visible_to
