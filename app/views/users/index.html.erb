@@ -1,0 +1,5 @@
+<% if policy(@users).index? %>
+<% @users.each do |user| %>
+  <%= user.email %>
+<% end %>
+<% end %>
