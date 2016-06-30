@@ -6,4 +6,10 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :viewers
   has_many :readable, through: :viewers, source: :note
+
+    enum role: [:user, :vip, :admin]
+
+    def guest?
+persisted?
+end
 end
