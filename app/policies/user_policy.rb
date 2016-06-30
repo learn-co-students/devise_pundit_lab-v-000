@@ -4,18 +4,18 @@ class UserPolicy < ApplicationPolicy
     @record = record
   end
   def index?
-    user.admin?
+    @user.admin?
   end
 
   def show?
-    user.admin? || record.user == user
+    @user.admin? || @user == @record
   end
 
   def update?
-    user.admin?
+    @user.admin? || @user == @record
   end
 
   def destroy?
-    user.admin?
+    @user.admin?
   end
 end
