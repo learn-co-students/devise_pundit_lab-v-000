@@ -1,17 +1,13 @@
 class UsersController < ApplicationController
 
-  
  
-   def edit
+  def index
+    @users = User.all
   end
 
-  def destroy
-   @user.destroy
-    redirect_to users_path, :notice => "User deleted."
-  end
-private 
- def secure_params
-    params.require(:user).permit(:role)
+  def show
+    @user = User.find(params[:id])
+    authorize @user
   end
 
 end
