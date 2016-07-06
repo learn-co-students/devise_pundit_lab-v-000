@@ -15,7 +15,7 @@ feature 'User delete', :devise, :js do
   #   Given I am signed in
   #   When I delete my account
   #   Then I should see an account deleted message
-  scenario 'user can delete own account' do
+  scenario 'user can delete own account', js: true do
     skip 'skip a slow test'
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)

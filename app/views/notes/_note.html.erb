@@ -1,8 +1,7 @@
 <div class=note>
   <div class=note-content>
-    <%= note.content %>
-  </div>
+    <%= link_to note.content, note_path(note) %> <%= " - " if policy(note).update? %> <%= link_to "Edit", edit_note_path(note) if policy(note).update? %>  </div>
   <div class=note-author>
-    <%= note.user.name %>
+    Author: <%= note.user.email %>
   </div>
 </div>

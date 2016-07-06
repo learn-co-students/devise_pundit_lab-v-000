@@ -1,3 +1,4 @@
+Rails.application.routes.default_url_options[:host] = 'http://learn-rails.dakotalmartinez.c9users.io/'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

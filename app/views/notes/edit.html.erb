@@ -1,1 +1,6 @@
-<%= render :partial => 'form', :locals => {note: @note} %>
+<h1>Edit Note</h1>
+<%= render partial: 'form', locals: { note: @note } %>
+<%= render partial: 'visible_to', locals: { note: @note } %>
+<p>
+    <%= link_to 'Delete', @note, :method => :delete, data: { confirm: "Are you sure you want to delete this note?" } %>
+</p>

@@ -1,0 +1,6 @@
+<% if note.readers.any? %>
+  <p>Currently visible to: </p>
+  <% note.readers.each do |reader| %>
+    <div><%= reader.email %></div>
+  <% end %>
+<% end %>
