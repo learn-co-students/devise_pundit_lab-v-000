@@ -1,0 +1,12 @@
+<h1>Welcome</h1>
+<h3>All Users: </h3>
+<% @users.each do |user| %>
+  <p><%= user.email %></p>
+<% end %>
+
+<% if user_signed_in? %>
+  <p><%= link_to "New note", new_note_path %></p>
+<% end %>
+<% if user_signed_in? %>
+  <p><%= link_to "All notes", notes_path %></p>
+<% end %>

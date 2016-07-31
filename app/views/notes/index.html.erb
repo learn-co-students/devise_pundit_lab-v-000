@@ -1,1 +1,6 @@
 <%= render @notes %>
+
+
+<% if policy(@note).create? %>
+  <%= link_to "Add Post", new_note_path %>
+<% end %>
