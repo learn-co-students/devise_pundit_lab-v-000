@@ -6,4 +6,13 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :viewers
   has_many :readable, through: :viewers, source: :note
+
+  #after_initialize :default_role_value
+  enum role: [:user, :admin]
+
+
+  #def default_role_value
+   #self.role ||= :guest
+  #end
+
 end
