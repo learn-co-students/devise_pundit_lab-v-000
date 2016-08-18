@@ -1,1 +1,11 @@
+<% if @user%>
+<%= @user.email %>
+<% end %>
+Home
+
 <%= render @notes %>
+<% if @user %>
+
+<%= @user.email %>
+
+<% end %>
