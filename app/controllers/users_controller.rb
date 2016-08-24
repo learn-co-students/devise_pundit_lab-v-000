@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @user = current_user
-    authorize @user
-    authorize @users
+    #authorize @user
+    #authorize @users
   end
 
   def show
