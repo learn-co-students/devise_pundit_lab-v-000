@@ -8,7 +8,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    authorize @user
+    #authorize @user
+    redirect_to users_path, :alert => "Access denied." unless current_user == @user || current_user.admin?
   end
 
   def update
