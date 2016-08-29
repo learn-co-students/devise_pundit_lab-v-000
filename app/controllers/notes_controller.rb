@@ -6,6 +6,7 @@ class NotesController < ApplicationController
   
   def create
     note = Note.new(note_params)
+    authorize note
     note.user = current_user
     note.save!
     redirect_to '/'
@@ -13,6 +14,7 @@ class NotesController < ApplicationController
 
   def update
     @note.update(note_params)
+    authorize @note
     redirect_to '/'    
   end
   
@@ -21,6 +23,7 @@ class NotesController < ApplicationController
   end
   
   def show
+    authorize @note
   end
 
   def index
