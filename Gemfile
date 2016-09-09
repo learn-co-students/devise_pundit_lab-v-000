@@ -41,6 +41,9 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'jquery-turbolinks'
+
+gem 'bootstrap-sass'
 
 gem 'devise'
 gem 'devise_invitable'
