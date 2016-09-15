@@ -1,0 +1,2 @@
+module DeviseInvitable::RegistrationsHelper
+end
