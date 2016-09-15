@@ -1,0 +1,2 @@
+module DeviseInevitable::RegistrationsHelper
+end
