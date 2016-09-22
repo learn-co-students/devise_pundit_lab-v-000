@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
   has_many :viewers
   has_many :readable, through: :viewers, source: :note
 
-  enum role: [:normal, :moderator, :admin]
+  enum role: [:user, :moderator, :admin]
+
+
 
 
   # after_initialize :set_default_role
