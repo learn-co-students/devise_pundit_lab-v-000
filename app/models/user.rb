@@ -8,4 +8,13 @@ class User < ActiveRecord::Base
   has_many :readable, through: :viewers, source: :note
 
   enum role: [:normal, :moderator, :admin]
+
+
+  # after_initialize :set_default_role
+  #
+  # private
+  #
+  # def set_default_role
+  #   self.role ||= :normal
+  # end
 end
