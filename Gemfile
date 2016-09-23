@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'pry'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,7 +50,7 @@ gem 'pundit'
 gem 'sqlite3'
 
 group :development do
-  gem 'better_errors'
+  # gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
