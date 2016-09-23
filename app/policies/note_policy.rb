@@ -6,24 +6,20 @@ class NotePolicy < ApplicationPolicy
   end
 
   def create?
-    binding.pry
-    note.try(:user) == user
+#    binding.pry
+    note.try(:user) == user || user.admin?
   end
-  #
-  # def index?
-  #   user.admin?
-  # end
-  #
-  # def show?
-  #   the_user == user || user.admin?
-  # end
-  #
-  # def update?
-  #   user.admin?
-  # end
-  #
-  # def destroy?
-  #   user.admin?
-  # end
+
+  def edit?
+    note.try(:user) == user || user.admin?
+  end
+
+  def show?
+    note.try(:user) == user || user.moderator? || user.admin?
+  end
+
+  def delete?
+    note.try(:user) == user || user.admin?
+  end
 
 end
