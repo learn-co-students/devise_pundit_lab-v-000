@@ -1,8 +1,16 @@
 <div class=note>
   <div class=note-content>
-    <%= note.content %>
+    <h4>Note:</h4>
+      <p><%= link_to note.content, user_note_path(note.user_id, note.id) %></p>
+      <p><%# link_to note.content, [user, note] %></p>
   </div>
-  <div class=note-author>
-    <%= note.user.name %>
-  </div>
+
+  <% if user&.name.present? %>
+    <div class=note-author>
+      <p>by <%= link_to user.name, user_path(user) %></p>
+    </div>
+  <% end %>
+
+  <%= render partial: 'readers', locals: {readers: note.readers} if note.readers.present? %>
+
 </div>

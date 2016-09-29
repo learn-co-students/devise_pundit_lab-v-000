@@ -1,0 +1,10 @@
+Reader(s):
+  <ul>
+    <% policy_scope(readers).each do |reader| %>
+      <% if reader.name.present? %>
+      <li>
+        <%= reader.name %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
