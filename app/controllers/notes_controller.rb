@@ -12,6 +12,8 @@ class NotesController < ApplicationController
   end
 
   def update
+    @note = Note.find(params[:id])
+    authorize @note
     @note.update(note_params)
     redirect_to '/'    
   end
@@ -36,3 +38,4 @@ class NotesController < ApplicationController
     params.require(:note).permit(:content, :visible_to)
   end
 end
+
