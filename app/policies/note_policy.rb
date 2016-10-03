@@ -21,21 +21,21 @@ class NotePolicy < ApplicationPolicy
   #   record.try(:user) == user || user.admin?
   # end
 
-  def new?
-    record.try(:user) == user || user.admin?
-  end
+  # def new?
+  #   record.try(:user) == user || user.admin?
+  # end
 
   def create?
     record.try(:user) == user || user.admin?
   end
 
   def show?
-    record.try(:user) == user || user.admin?
+    record.try(:user) == user || record.readers.include?(user) || user.admin?
   end
 
-  def edit?
-    record.try(:user) == user || user.admin?
-  end
+  # def edit?
+  #   record.try(:user) == user || user.admin?
+  # end
 
   def update?
     record.try(:user) == user || user.admin?

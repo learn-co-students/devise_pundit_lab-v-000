@@ -21,13 +21,14 @@ class Note < ActiveRecord::Base
   before_save :ensure_owner_can_read
 
   def visible_to=(new_readers)
-    self.readers = new_readers.split(',').map do |name|
-      User.find_by(name: name.squish.downcase)
+    # binding.pry
+    self.readers = new_readers.split(',').collect do |name|
+      User.find_by(name: name.squish)
     end.compact
   end
 
   def visible_to
-    readers.map do |user|
+    readers.collect do |user|
       user.name
     end.join(', ')
   end

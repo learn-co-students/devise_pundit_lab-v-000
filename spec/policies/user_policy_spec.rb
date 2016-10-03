@@ -17,6 +17,7 @@ describe UserPolicy do
   permissions :show? do
     it "prevents other users from seeing your profile" do
       expect(subject).not_to permit(current_user, other_user)
+      # permit(user_reference, record_reference)
     end
     it "allows you to see your own profile" do
       expect(subject).to permit(current_user, current_user)
