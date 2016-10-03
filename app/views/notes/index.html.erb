@@ -1,1 +1,13 @@
-<%= render @notes %>
+<h1>Your Notes</h1>
+
+<% if @notes.present? %>
+
+  <% policy_scope(@notes).each do |note| %>
+    <%= render partial: 'note', locals: {note: note, user: note.user} %><br>
+  <% end %>
+
+<% else %>
+    <h3>You currently do not have any notes.</h3>
+<% end %>
+
+<%= link_to "Create a new note", new_user_note_path %>

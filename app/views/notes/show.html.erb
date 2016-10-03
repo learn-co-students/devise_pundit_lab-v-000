@@ -1,0 +1,10 @@
+<h1>Note</h1>
+
+<%= render partial: 'note', locals: {user: @note.user, note: @note} %>
+<br>
+
+<%= link_to "Edit Note", edit_user_note_path(@note.user, @note) %>
+<%= link_to "Delete Note", user_note_path(@note.user, @note),
+                           method: :delete,
+                           data: { confirm: 'Are you sure?' } %>
+<%= link_to "New Note", new_user_note_path %>
