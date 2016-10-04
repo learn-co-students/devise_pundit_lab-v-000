@@ -5,6 +5,8 @@ class NotesController < ApplicationController
   end
   
   def create
+    authorize current_user
+    
     note = Note.new(note_params)
     note.user = current_user
     note.save!
