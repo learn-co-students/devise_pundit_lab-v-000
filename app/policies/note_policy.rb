@@ -11,6 +11,4 @@ class NotePolicy < ApplicationPolicy
   end
 
 
-
-
 end
