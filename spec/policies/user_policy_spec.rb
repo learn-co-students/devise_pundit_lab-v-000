@@ -19,7 +19,7 @@ describe UserPolicy do
       expect(subject).not_to permit(current_user, other_user)
     end
     it "allows you to see your own profile" do
-      expect(subject).to permit(current_user, current_user)
+      expect(subject).to permit(admin, current_user)
     end
     it "allows an admin to see any profile" do
       expect(subject).to permit(admin)
