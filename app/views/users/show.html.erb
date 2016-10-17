@@ -1,0 +1,7 @@
+<%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+
+
+<h2>I'm a show page.</h2>
+<h1> User </h1>
+<%=@user.email%>
+<h3><%=link_to("Sign out", destroy_user_session_path(current_user), :method => :delete)%></h3>
