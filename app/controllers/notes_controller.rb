@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
-  
+  before_action :user_logged_in?
+
   def new
     
   end
@@ -8,25 +9,28 @@ class NotesController < ApplicationController
     note = Note.new(note_params)
     note.user = current_user
     note.save!
-    redirect_to '/'
+    redirect_to '/notes'
   end
 
   def update
+    @note = Note.find_by(id: params[:id])
     @note.update(note_params)
-    redirect_to '/'    
+    redirect_to '/notes'    
   end
   
   def edit
     @note = Note.find(params[:id])
+    authorize @note
   end
   
   def show
+    
   end
 
   def index
-    @notes = Note.none
-    if current_user
-      @notes = current_user.readable
+    @notes = current_user.readable
+    if current_user.admin? || current_user.moderator?
+      @notes = Note.all
     end
   end
 
@@ -34,5 +38,11 @@ class NotesController < ApplicationController
 
   def note_params
     params.require(:note).permit(:content, :visible_to)
+  end
+
+  def user_logged_in?
+    if !current_user
+      redirect_to '/'
+    end
   end
 end

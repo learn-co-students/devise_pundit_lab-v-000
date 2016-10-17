@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CancanLab</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  
-<%= yield %>
+  <head>
+    <title>CancanLab</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="flash">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    </div>
+      <% if user_signed_in? %>
+        <p> Welcome. You're signed in, <%= @current_user.name %>(<%= @current_user.email %>)</p>
+        <p> Your role is: <%= @current_user.role %></p>
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Profile", edit_user_registration_path(@current_user) %></li>
+          <li><%= link_to "Your Notes", notes_path %></li>
+          <li><%= link_to "New Note", new_note_path %></li>
+          <li><%= link_to "Sign out", logout_path, method: :delete%></li>
+          <%= admin_links(@current_user) %>
+        </ul>
+      <% else %>
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Sign up", signup_path %></li>
+          <li><%= link_to "Sign in", login_path %></li>
+        </ul>
+      <% end %> 
+    <div>
+      
+    </div>
+    
+    <%= yield %>
 
-</body>
+  </body>
 </html>
