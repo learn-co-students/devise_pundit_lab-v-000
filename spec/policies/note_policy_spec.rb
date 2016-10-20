@@ -23,11 +23,11 @@ describe NotePolicy do
     it "allows you to edit your own posts" do
       expect(subject).to permit(current_user, current_user)
     end
-    it "allows you to add viewers to you own posts" do
-      expect(subject).to permit(current_user, other_user)
+    it "allows you to add viewers to your own posts" do
+      expect(subject).to permit(current_user, current_user)
     end
     it "allows you to remove viewers of your own posts" do
-      expect(subject).to permit(current_user, other_user)
+      expect(subject).to permit(current_user, current_user)
     end
     it "allows an admin to make updates" do
       expect(subject).to permit(admin)
@@ -45,13 +45,13 @@ describe NotePolicy do
 
   permissions :show? do
     it "allows you to see notes you're a viewer of" do
-      expect(subject).to permit(current_user, other_user)
+      expect(subject).to permit(current_user, current_user)
     end
     it "allows you to see your own notes" do
       expect(subject). to permit(current_user, current_user)
     end
     it "allows a moderator to see all notes" do
-      expect(subject).to permit(moderator)
+      expect(subject).to permit(moderator, note)
     end
     it "allows an admin to see any post" do
       expect(subject).to permit(admin)
