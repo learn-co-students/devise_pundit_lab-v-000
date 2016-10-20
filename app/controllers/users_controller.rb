@@ -1,23 +1,18 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
 
   def Home
     @users = User.all
   end
 
   def index
-    @user = User.find(params[:id])
-    authorize @user
-    redirect_to users_path
+    @users = User.all
+    render :index
   end
 
   def show
     @user = User.find(params[:id])
-    if authorize @user
-      redirect_to users_path(@user)
-    else
-      redirect_to users_path, :alert => "Access denied."
-    end
+    authorize @user
+    redirect_to users_path(@user)
   end
 
   def update
