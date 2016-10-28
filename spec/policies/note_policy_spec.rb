@@ -3,11 +3,10 @@ describe NotePolicy do
 
   let (:current_user) { FactoryGirl.build_stubbed :user }
   let (:other_user) { FactoryGirl.build_stubbed :user }
-  let (:viewer_user) { FactoryGirl.build_stubbed :user }
+  let (:viewer_user) { FactoryGirl.create :user }
   let (:moderator) { FactoryGirl.build_stubbed :user, :moderator}
   let (:admin) { FactoryGirl.build_stubbed :user, :admin }
-  let (:note) { FactoryGirl.build_stubbed :note, user_id: current_user.id }
-  let (:viewer) { FactoryGirl.build_stubbed :viewer, user_id: viewer_user.id, note_id: note.id }
+  let (:note) { FactoryGirl.build_stubbed :note, user_id: current_user.id, visible_to: viewer_user.name }
 
   permissions :index? do
     it "denies access if not an admin or a moderator" do
@@ -33,8 +32,6 @@ describe NotePolicy do
     end
 
     it "allows a viewer of one of your notes to see that note" do
-      note.readers << viewer_user
-      note.save
       expect(subject).to permit(viewer_user, note)
     end
 
