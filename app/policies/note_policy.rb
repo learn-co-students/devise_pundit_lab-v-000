@@ -15,8 +15,8 @@ class NotePolicy < ApplicationPolicy
 		@user.admin? || @user == @record.user
 	end
 
-	def show
-		@user.admin? || @user.moderator? || @record.user == user || @record.readers.include?(user)
+	def show?
+		@user.admin? || @user.moderator? || @record.user == @user || @record.readers.include?(@user)
 	end
 
 	class Scope
