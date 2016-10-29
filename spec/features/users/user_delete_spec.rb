@@ -16,8 +16,10 @@ feature 'User delete', :devise, :js do
   #   When I delete my account
   #   Then I should see an account deleted message
 
-  # this test open my Firefox browser and then complains after 60 seconds
+  # this test opens my Firefox browser and then complains after 60 seconds
   # when the test fails to do anything with the browser
+  # also, the desired outcome appears to directly contradict the destroy
+  # permissions test in user_policy_spec
 
   # scenario 'user can delete own account' do
   #   skip 'skip a slow test'
