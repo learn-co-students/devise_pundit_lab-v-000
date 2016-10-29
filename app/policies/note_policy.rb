@@ -34,6 +34,7 @@ class NotePolicy < ApplicationPolicy
 			else
 				viewable_notes = []
 				scope.each do |note|
+					binding.pry
 					viewable_notes << note if note.user == user || note.readers.include?(user)
 				end
 				viewable_notes
