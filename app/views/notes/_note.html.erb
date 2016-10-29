@@ -1,8 +1,8 @@
 <div class=note>
   <div class=note-content>
-    <%= note.content %>
+    <%= note.content if note %>
   </div>
   <div class=note-author>
-    <%= note.user.name %>
+    <%= note.user.name if note && note.user %>
   </div>
 </div>
