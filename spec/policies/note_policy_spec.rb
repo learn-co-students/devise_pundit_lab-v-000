@@ -16,6 +16,16 @@ describe NotePolicy do
   		note
   end
 
+  let (:note_user2) { FactoryGirl.build_stubbed :user }
+
+	let (:note) do
+		note = Note.new(content: "He, he, he!")
+		note.user = note_user2
+		note.readers << other_user2
+		note.save
+		note
+	end
+
   permissions :edit? do
     it "denies access if not an admin or the creator" do
       expect(NotePolicy).not_to permit(other_user1, note)
@@ -62,6 +72,13 @@ describe NotePolicy do
       expect(NotePolicy).to permit(other_user1, note)
       expect(NotePolicy).to permit(note_user, note)
     end
+  end
+
+  describe 'policy scope' do
+  	it 'lets admins and moderators see all notes' do
+  		expect(policy_scope(admin, Note.all)).to include(note)
+  		expect(policy_scope(admin, Note.all)).to include(note2)
+  	end
   end
 
 
