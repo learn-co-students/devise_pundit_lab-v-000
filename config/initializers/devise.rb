@@ -6,13 +6,13 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '7b76f58692154e565dd37e5722a60bc21de1c519fe14b81d0ae27598947ea4ba57dea388bb416b5345fa6feb58a187267c429b5312e577a03ce2fb2a214c7d9a'
+  # config.secret_key = 'dc6a35c22ea239457eb3ee54b2e8ad0f6dd699972979193ebc4fb19065af7c7b55b816d122a209c146d588ee3d4efb26df506d54167bb529c6448937f69a7d3c'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'no-reply@' + Rails.application.secrets.domain_name
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -99,7 +99,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = 'fad6c44fa17907c0534fa9ac481d8c6331edbdb9da2684edb3eabca21b8ef5d99ca6e6fdd85f601dd70e94210333b070592da019b26ce81971d10f57a03ae30e'
+  # config.pepper = '9c47c916df8064c1f7951566a320efbbf3d450486674dfd6f1eb7f50924fb9673b72a8a3ca1e1651a729d9a0d29921149712b30291b8e2b0ba7c1f26d3e574e6'
 
   # Send a notification email when the user's password is changed
   # config.send_password_change_notification = false
@@ -172,7 +172,8 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  
+  config.reconfirmable = false
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
@@ -189,7 +190,7 @@ Devise.setup do |config|
 
   # Options to be passed to the created cookie. For instance, you can set
   # secure: true in order to force SSL only cookies.
-  # config.rememberable_options = {}
+  config.rememberable_options = {}
 
   # ==> Configuration for :validatable
   # Range for password length.
@@ -198,7 +199,7 @@ Devise.setup do |config|
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  # config.email_regexp = /\A[^@]+@[^@]+\z/
+  config.email_regexp = /\A[^@]+@[^@]+\z/
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
