@@ -1,60 +1,50 @@
-# Devise and Pundit Lab
+# Devise with Roles
 
-## Objectives
+## Learning Objectives
 
-We're going to learn how to integrate Pundit into a Rails application.
-For our data model, we're going to return to our secret notes message board.
+  1. Explain the use of role-based authorization with Devise.
+  2. Design a set of roles to model a forum with different permission levels.
+  3. Set up Devise roles to implement such a model.
 
-## Data model
+## Data Model
 
-We're going to have Users, Notes, and a viewers join table, which gives users read access to notes.
+In this lab, we're going to make a simple discussion board.
+
+We'll have a Post model, and three user roles: user, vip, and admin.
+
+* Users can read anyone's Posts, and create, read, update, and delete their own posts.
+* VIPs can do everything a User can do, and update other users' posts.
+* Admins can do anything that Users and VIPs can do, and they can delete other users' posts.
 
 ## Instructions
 
-The lab comes with a Rails skeleton with Devise installed.
+Provided is a Rails skeleton with the [Devise](https://github.com/plataformatec/devise) gem installed.
 
-1. Add a role enum to the user model.
-2. Write a policy governing the User model. Ensure all policy specs pass.
+1. Run the migrations. A basic User model and migrations have been set up for you as part of the devise install.
+2. Add roles to the user model. The specs will tell you what roles are expected of the model.
 3. Add authentication and authorization filters to your users controller. Ensure that only administrators can update or destroy users.
+4. Run `rails generate devise:views` to generate the views.
 
-We've included the relevant models/controllers and views from the CanCanCan lab
-so you don't have to rebuild them.  The data model is exactly the same, the only
-difference is that we're using Roles and Pundit to authorize actions rather than
-[CanCanCan].
+Once you've reached this point, all the `User` specs should be passing. For the
+next part, we'll create a `Post` model, which has different permissions for
+different `User` roles.
 
-# Note
-If you launch the app in the browser in its starting state it will throw an error. This occurs because
-certain things the code depends on, like `current_user`, are no longer functional.
-You'll need to start implementing devise to boot the app up in the browser.
-Follow the tests.
+We've written one basic `Post` spec for you, but you will need to write
+additional specs for the `Post` model and controller. You can reference the
+feature and model specs for the `Users` controller to see how to write these.
 
-**Hints**
-* Some tests might require you adding the flash to a layout.
-* If you use all the devise modules you will run into problems.
-  Figure out which ones you need and include only those modules.
+1. Create a `Post` model and migration. Posts have an owner and content.
+2. Create a posts controller. Ensure that it enforces the following requirements:
+  - Posts can be created by any user
+  - Anyone can read any post
+  - Users can edit or delete Posts they own
+  - VIPs can edit anyone's Posts
+  - Admins can do anything to any post.
+3. Write views for your posts.
+4. Try it out!
 
-Using the User policy as a guide, write a spec for the NotePolicy class, then
-write the NotePolicy class. You should ensure that:
+## Resources
+* [Devise](https://www.youtube.com/watch?v=RTXyPhRBQ_4)
 
-  * Normal users can:
-    * Create notes owned by them
-    * Edit their own posts
-    * Delete their own posts
-    * Add viewers to their own posts
-    * Remove viewers from their own posts
-    * See notes they're viewers of
-    * See their own notes
-  * Moderators can:
-    * See all notes.
-  * Admins can:
-    * Perform any action on a user or a note.
+* [Lab Review](https://github.com/learn-co-curriculum/rails-video-review-devise-roles-lab)
 
-Once your policy spec is written and passes, write feature specs for creating, reading, and updating notes. You can copy the feature specs that currently exist for updating and deleting users.
-
-## References
-* [Pundit]
-
-[Pundit]: https://github.com/elabs/pundit
-[CanCanCan]: https://github.com/CanCanCommunity/cancancan
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/devise_pundit_lab' title='Devise and Pundit Lab'>Devise and Pundit Lab</a> on Learn.co and start learning to code for free.</p>
