@@ -1,6 +1,8 @@
 class NotePolicy < ApplicationPolicy
   def index?
-    user.admin? || user.moderator?
+    record.all? do |note|
+      NotePolicy.new(user, note).try(:show?)
+    end
   end
 
   def show?

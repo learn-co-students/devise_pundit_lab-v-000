@@ -11,6 +11,7 @@ class NotesController < ApplicationController
       note = Note.new(note_params)
       note.user = current_user
       note.save!
+      flash[:notice] = "Created note."
     end
     redirect_to '/'
   end
@@ -34,10 +35,14 @@ class NotesController < ApplicationController
   end
 
   def index
-    @notes = Note.none
-    if current_user
+    if current_user.try(:role) == 'admin' || current_user.try(:role) == 'moderator'
+      @notes = Note.all
+    elsif current_user
       @notes = current_user.readable
+    else
+      @notes = Note.none
     end
+    authorize(@notes)
   end
 
   def destroy
