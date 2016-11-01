@@ -38,7 +38,7 @@ feature 'Note delete', :js do
     expect(page).to have_content 'Access denied.'
   end
 
-  scenario "user cannot delete another person's note" do
+  scenario "admin can delete another user's note" do
     user = FactoryGirl.create(:user, :admin)
     note = FactoryGirl.create(:note)
     login_as(user, :scope => :user)

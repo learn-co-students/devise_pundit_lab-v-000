@@ -19,6 +19,7 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     authorize(@note)
     @note.update(note_params)
+    flash[:notice] = "Edited note."
     redirect_to '/'    
   end
   
