@@ -1,8 +1,8 @@
 <div class=note>
   <div class=note-content>
-    <%= note.content %>
+    <%= link_to note.content, note_path(note) %>
   </div>
   <div class=note-author>
-    <%= note.user.name %>
+    <%= note.user.name if note.user %>
   </div>
 </div>
