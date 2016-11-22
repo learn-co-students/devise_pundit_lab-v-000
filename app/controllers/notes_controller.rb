@@ -1,4 +1,7 @@
 class NotesController < ApplicationController
+  before_filter :authenticate_user!
+  
+  skip_before_filter :authenticate_user!, only: [:index]
   
   def new
     
