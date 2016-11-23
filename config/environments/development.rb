@@ -28,16 +28,15 @@ Rails.application.configure do
   config.assets.debug = true
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    authentication: :plain,
+    address: 'smtp.mailgun.org',
     port: 587,
-    domain: Rails.application.secrets.domain_name,
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: Rails.application.secrets.email_provider_username,
-    password: Rails.application.secrets.email_provider_password
+    domain: 'sandboxc2000c69d6ff4361ab2142604815cfd0.mailgun.org',
+    user_name: 'postmaster@sandboxc2000c69d6ff4361ab2142604815cfd0.mailgun.org',
+    password: 'ff68e0706a7f22f6d4b49b061adcf054'
   }
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
