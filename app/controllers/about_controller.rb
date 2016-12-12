@@ -1,5 +1,5 @@
 class AboutController < ApplicationController
 
-  def about
+  def home
   end
 end
