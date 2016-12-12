@@ -1,23 +1,18 @@
 class UserPolicy < ApplicationPolicy
- attr_reader :user, :note
 
-
-  def initialize(user, note)
-    @user = user
-    @note = note
-  end
-
-  def index?
-
+   def index?
+    user.admin?
   end
 
   def show?
+    record == user || user.admin?
   end
-  
+
   def update?
-    user.admin?  || note.try(:user) == user
+    record == user || user.admin?
   end
 
   def destroy?
+    user.admin? && (record != user)
   end
 end
