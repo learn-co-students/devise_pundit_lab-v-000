@@ -3,4 +3,4 @@
 <%= link_to "New Note", new_note_path %>
 <% if @user.notes %>
   <%= render partial: 'notes/note', collection: @user.notes, as: :note %>
-<% end %>
+<% end %> 
