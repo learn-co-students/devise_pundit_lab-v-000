@@ -5,4 +5,6 @@
   <div class=note-author>
     <%= note.user.name %>
   </div>
+  <%= link_to "Edit Note", edit_note_path(note) %>
+  <%= link_to "Delete Note", note, method: 'delete', data: { confirm: "Really?" } %>
 </div>

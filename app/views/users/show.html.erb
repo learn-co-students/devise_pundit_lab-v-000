@@ -1,0 +1,6 @@
+<h1><%= @user.name %></h1>
+<p>Email: <%= @user.email %></p>
+<%= link_to "New Note", new_note_path %>
+<% if @user.notes %>
+  <%= render partial: 'notes/note', collection: @user.notes, as: :note %>
+<% end %>
