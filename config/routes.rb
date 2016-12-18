@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'notes#index'
-
+  get '/users/cancel', to: 'users#destroy'
   get '/pages/about', to: 'static#about'
 
   # Example of regular route:

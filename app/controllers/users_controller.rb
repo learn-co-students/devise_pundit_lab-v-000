@@ -8,4 +8,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
   end
+
+  def destroy
+    @user = User.find(params[:id])
+  end
 end
