@@ -2,3 +2,4 @@
 User
 <%= @user.email %>
 <%= link_to 'Destroy Account', edit_user_registration_path(@user) %>
+<%= link_to("Cancel my account", cancel_user_registration_path, :method => :delete) %>
