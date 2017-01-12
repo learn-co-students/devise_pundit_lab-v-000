@@ -47,6 +47,8 @@ gem 'devise_invitable'
 gem 'high_voltage'
 gem 'pundit'
 gem 'sqlite3'
+gem 'launchy'
+gem 'pry'
 
 group :development do
   gem 'better_errors'
