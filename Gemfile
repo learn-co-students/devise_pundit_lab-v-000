@@ -47,6 +47,7 @@ gem 'devise_invitable'
 gem 'high_voltage'
 gem 'pundit'
 gem 'sqlite3'
+gem 'launchy'
 
 group :development do
   gem 'better_errors'
@@ -55,6 +56,7 @@ group :development do
   gem 'rails_apps_testing'
   gem 'rails_layout'
   gem 'spring-commands-rspec'
+  gem 'pry'
 end
 
 group :development, :test do
