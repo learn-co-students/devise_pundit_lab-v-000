@@ -1,3 +1,5 @@
+require 'pry'
+
 describe UserPolicy do
   subject { UserPolicy }
 
