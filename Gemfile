@@ -47,7 +47,7 @@ gem 'devise_invitable'
 gem 'high_voltage'
 gem 'pundit'
 gem 'sqlite3'
-
+gem 'cancan'
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'

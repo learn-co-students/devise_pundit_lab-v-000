@@ -1,0 +1,6 @@
+<%= @user.name %>
+<%= @user.email %>
+
+<% if policy(@user).update? %>
+  <%= link_to "Edit", edit_user_registration_path(@user) %>
+<% end %>
