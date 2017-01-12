@@ -49,7 +49,7 @@ gem 'pundit'
 gem 'sqlite3'
 
 group :development do
-  gem 'better_errors'
+  # gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
