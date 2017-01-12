@@ -1,0 +1,8 @@
+<% if flash.keys.size != 0 %>
+  <% flash.each do |key, val| %>
+    <div class=key>
+      <%= val %>
+    </div>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,8 @@
+<h1>User</h1>
+<%= div_for @user do %>
+  <% @user.attributes.each do |key, val| %>
+    <% if !val.nil? %>
+      <%= content_tag(:div, "#{key}: #{val}")%></div><br>
+    <% end %>
+  <% end %>
+<% end %>
