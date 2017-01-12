@@ -18,6 +18,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+gem 'pry'
 # bundle exec rake doc:rails generates the API under doc/api.
 
 
@@ -49,7 +50,7 @@ gem 'pundit'
 gem 'sqlite3'
 
 group :development do
-  gem 'better_errors'
+
   gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
