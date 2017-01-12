@@ -6,9 +6,15 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  
-<%= yield %>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role= "main">
+      <!-- Adding Devise flash messages -->
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </main>
 
-</body>
+  </body>
 </html>
