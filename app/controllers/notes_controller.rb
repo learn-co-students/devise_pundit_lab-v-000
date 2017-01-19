@@ -18,8 +18,9 @@ class NotesController < ApplicationController
 
   def update
     @note = Note.find_by(id: params[:id])
+    binding.pry
     if @note.update_attributes(permitted_attributes(@note))
-      redirect_to @note
+      redirect_to @note unless @note.nil?
     else
       render :edit
     end

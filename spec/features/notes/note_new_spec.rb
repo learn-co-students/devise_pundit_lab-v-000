@@ -5,22 +5,23 @@ Warden.test_mode!
 #   As a user
 #   I want to edit my user profile
 #   So I can change my email address
-feature 'Note edit', :devise do
+feature 'Note new', :devise do
 
   after(:each) do
     Warden.test_reset!
   end
 
-  # Scenario: User changes note contents
+  # Scenario: User fills out note contents
   #   Given I am signed in
-  #   When I edit my note
-  #   Then I see a note updated message
-  scenario 'user edits their note' do
+  #   When I submit a new note
+  #   Then I see a note created message
+  scenario 'user creates a new note' do
     user = FactoryGirl.create(:user)
-    note = FactoryGirl.create(:note, content: 'you can see me', user_id: user.id)
+    #note = FactoryGirl.create(:note, content: 'you can see me', user_id: user.id)
     login_as(user, :scope => :user)
-    visit edit_note_path(note)
+    visit new_note_path
     fill_in 'Content', :with => 'can you still see me?'
+    fill_in 'Visible to', with: 'The Great One'
     click_button 'save'
   end
 
