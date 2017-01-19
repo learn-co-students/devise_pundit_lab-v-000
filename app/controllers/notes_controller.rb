@@ -1,9 +1,10 @@
 class NotesController < ApplicationController
-  
+  before_action :set_user
+
   def new
-    
+
   end
-  
+
   def create
     note = Note.new(note_params)
     note.user = current_user
@@ -11,15 +12,19 @@ class NotesController < ApplicationController
     redirect_to '/'
   end
 
-  def update
-    @note.update(note_params)
-    redirect_to '/'    
-  end
-  
   def edit
     @note = Note.find(params[:id])
   end
-  
+
+  def update
+    @note = Note.find_by(id: params[:id])
+    if @note.update_attributes(permitted_attributes(@note))
+      redirect_to @note
+    else
+      render :edit
+    end
+  end
+
   def show
   end
 
@@ -34,5 +39,9 @@ class NotesController < ApplicationController
 
   def note_params
     params.require(:note).permit(:content, :visible_to)
+  end
+
+  def set_user
+    @user ||= User.find_by(id: params[:id])
   end
 end
