@@ -27,6 +27,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    check_logged_in do
+      authorize @user
+      @user.destroy
+      redirect_to root_path
+    end
   end
 
   private

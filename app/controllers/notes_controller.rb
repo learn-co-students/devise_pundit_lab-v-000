@@ -1,38 +1,53 @@
 class NotesController < ApplicationController
-  before_action :set_user
 
   def new
-
+    check_logged_in do
+      @note = Note.new(user_id: current_user.id)
+      authorize @note
+    end
   end
 
   def create
-    note = Note.new(note_params)
-    note.user = current_user
-    note.save!
-    redirect_to '/'
+    check_logged_in do
+      if !params[:note][:content].empty?
+        note = Note.new(note_params)
+        note.user = current_user
+        note.save!
+        authorize note
+        redirect_to '/'
+      else
+        render :new, alert: 'notes must have content.'
+      end
+    end
   end
 
   def edit
     @note = Note.find(params[:id])
+    authorize @note
   end
 
   def update
     @note = Note.find_by(id: params[:id])
-    binding.pry
     if @note.update_attributes(permitted_attributes(@note))
-      redirect_to @note unless @note.nil?
+      redirect_to note_path(@note) unless @note.nil?
     else
       render :edit
     end
   end
 
   def show
+    @note = Note.find_by(id: params[:id])
   end
 
   def index
-    @notes = Note.none
-    if current_user
-      @notes = current_user.readable
+    if user_signed_in?
+      @notes = Note.none
+      if current_user
+        @user = current_user
+        @notes = @user.readable
+      end
+    else
+      redirect_to pages_about_path
     end
   end
 
@@ -42,7 +57,4 @@ class NotesController < ApplicationController
     params.require(:note).permit(:content, :visible_to)
   end
 
-  def set_user
-    @user ||= User.find_by(id: params[:id])
-  end
 end

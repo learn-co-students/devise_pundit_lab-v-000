@@ -1,3 +1,8 @@
 <h1>Welcome</h1>
-
-<%= render @notes %><br><%= Note.all.size %>
+<h2><%= @user.name if @user %></h2></br>
+<% @notes.each do |n| %><br>
+  <%= n.content %><br>
+  <%= n.visible_to %><br>
+<% end %></br>
+total notes: <%= Note.all.size %><br></br>
+create note: <%= link_to "here", new_note_path %></br>
