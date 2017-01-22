@@ -41,7 +41,7 @@ group :development, :test do
   gem 'spring'
 end
 
-
+gem 'pry'
 gem 'devise'
 gem 'devise_invitable'
 gem 'high_voltage'
@@ -49,7 +49,6 @@ gem 'pundit'
 gem 'sqlite3'
 
 group :development do
-  gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
