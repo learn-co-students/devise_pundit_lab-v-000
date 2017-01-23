@@ -12,6 +12,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? && (record != user)
+    user.admin? || user
   end
 end
