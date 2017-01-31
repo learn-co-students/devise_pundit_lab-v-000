@@ -24,6 +24,7 @@ class NotesController < ApplicationController
   end
 
   def index
+    authorize @user
     @notes = Note.none
     if current_user
       @notes = current_user.readable
