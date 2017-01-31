@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
   
   def index?
-    user.admin?
+    user.admin? || record.try(:id) == user.id
   end
   
   def show?

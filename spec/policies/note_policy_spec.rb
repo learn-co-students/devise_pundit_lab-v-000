@@ -17,41 +17,71 @@ describe NotePolicy do
       expect(NotePolicy).not_to permit(other_user)
     end
     it "allows access for a moderator" do
-      expect(NotePolicy).to permit(admin)
+      expect(NotePolicy).to permit(moderator)
     end
     it "allows access for an admin" do
       expect(NotePolicy).to permit(admin)
     end
   end
 
-  #permissions :show? do
-  #  it "prevents other users from seeing your profile" do
-  #    expect(subject).not_to permit(current_user, other_user)
-  #  end
-  #  it "allows you to see your own profile" do
-  #    expect(subject).to permit(current_user, current_user)
-  #  end
-  #  it "allows an admin to see any profile" do
-  #    expect(subject).to permit(admin)
-  #  end
-  #end
-  #
-  #permissions :update? do
-  #  it "prevents updates if not an admin" do
-  #    expect(subject).not_to permit(current_user)
-  #  end
-  #  it "allows an admin to make updates" do
-  #    expect(subject).to permit(admin)
-  #  end
-  #end
-  #
-  #permissions :destroy? do
-  #  it "prevents deleting yourself" do
-  #    expect(subject).not_to permit(current_user, current_user)
-  #  end
-  #  it "allows an admin to delete any user" do
-  #    expect(subject).to permit(admin, other_user)
-  #  end
-  #end
+  permissions :edit? do
+    it "allows access for the user" do
+      expect(NotePolicy).to permit(current_user)
+    end
+    it "denies access if not the user or admin" do
+      expect(NotePolicy).not_to permit(other_user)
+    end
+    it "deinies access for a moderator" do
+      expect(NotePolicy).not_to permit(moderator)
+    end
+    it "allows access for an admin" do
+      expect(NotePolicy).to permit(admin)
+    end
+  end
+  
+  permissions :destroy? do
+    it "allows user to delete own post" do
+      expect(subject).to permit(current_user)
+    end
+    it "prevents other user from deleting post" do
+      expect(subject).not_to permit(other_user)
+    end
+    it "prevents moderator from deleting post" do
+      expect(subject).not_to permit(moderator)
+    end
+    it "allows admin to delete post" do
+      expect(subject).to permit(admin)
+    end
+  end
+
+  permissions :show? do
+    it "allows user to delete own post" do
+      expect(subject).to permit(current_user)
+    end
+    it "prevents other user from deleting post" do
+      expect(subject).not_to permit(other_user)
+    end
+    it "prevents moderator from deleting post" do
+      expect(subject).not_to permit(moderator)
+    end
+    it "allows admin to delete post" do
+      expect(subject).to permit(admin)
+    end
+  end
+  
+  permissions :update? do
+    it "allows user to delete own post" do
+      expect(subject).to permit(current_user)
+    end
+    it "prevents other user from deleting post" do
+      expect(subject).not_to permit(other_user)
+    end
+    it "prevents moderator from deleting post" do
+      expect(subject).not_to permit(moderator)
+    end
+    it "allows admin to delete post" do
+      expect(subject).to permit(admin)
+    end
+  end
 
 end
