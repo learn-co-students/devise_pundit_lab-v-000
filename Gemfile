@@ -19,7 +19,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-
+gem 'pry'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -42,8 +42,8 @@ group :development, :test do
 end
 
 
-gem 'devise'
-gem 'devise_invitable'
+gem 'devise', '3.5.4'
+gem 'devise_invitable', '1.5.5'
 gem 'high_voltage'
 gem 'pundit'
 gem 'sqlite3'
