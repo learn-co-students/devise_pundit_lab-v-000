@@ -4,6 +4,11 @@ class NotesController < ApplicationController
     
   end
   
+  def destroy
+    #authorize @note
+    @note.destroy
+  end
+  
   def create
     note = Note.new(note_params)
     note.user = current_user
@@ -12,6 +17,7 @@ class NotesController < ApplicationController
   end
 
   def update
+    #authorize @note
     @note.update(note_params)
     redirect_to '/'    
   end
@@ -21,10 +27,12 @@ class NotesController < ApplicationController
   end
   
   def show
+    #authorize @note
   end
 
   def index
     @notes = Note.none
+    #authorize @notes
     if current_user
       @notes = current_user.readable
     end
