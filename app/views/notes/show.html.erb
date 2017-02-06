@@ -1,0 +1,8 @@
+<p><%= @note.content %></p>
+<p>User: <%= @note.user.email %></p>
+
+<ul>
+  <% @note.readers.each do |reader| %>
+    <li><%= reader.email %></li>
+  <% end %>
+</ul>
