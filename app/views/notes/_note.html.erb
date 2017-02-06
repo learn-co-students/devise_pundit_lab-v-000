@@ -5,4 +5,7 @@
   <div class=note-author>
     <%= note.user.name %>
   </div>
+  <div class=note-link>
+    <%= link_to "Open Note", note_path(note) %>
+  </div>
 </div>

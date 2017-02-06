@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  # before_action :authenticate_user!, except: [:index]
   
   def new
     
@@ -21,6 +22,7 @@ class NotesController < ApplicationController
   end
   
   def show
+    @note = Note.find(params[:id])
   end
 
   def index

@@ -1,0 +1,9 @@
+<ul>
+<% @users.each do |user| %>
+  <% if policy(user).show? %>
+    <li><%= link_to user.email, user_path(user) %></li>
+  <% else %>
+    <li><%= user.email %></li>
+  <% end %>
+<% end %>
+</ul>

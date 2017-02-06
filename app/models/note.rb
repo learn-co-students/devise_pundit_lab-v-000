@@ -6,12 +6,12 @@ class Note < ActiveRecord::Base
   before_save :ensure_owner_can_read
   
   def visible_to
-    readers.map { |u| u.name }.join(', ')
+    readers.map { |u| u.email }.join(', ')
   end
 
   def visible_to=(new_readers)
-    self.readers = new_readers.split(',').map do |name|
-      User.find_by(name: name.strip)
+    self.readers = new_readers.split(',').map do |email|
+      User.find_by(email: email.strip)
     end.compact
   end
 
