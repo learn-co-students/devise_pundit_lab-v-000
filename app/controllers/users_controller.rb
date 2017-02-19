@@ -5,11 +5,20 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = policy_scope(User)
-    #User.find(params[:id])
-    render plain: "Access denied." unless @user
-    #@user = authorize User.find(params[:id])
+    @user = User.find(params[:id])
+    authorize @user
+  end
 
+  def update
+    @user = User.find(params[:id])
+    authorize @user
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    authorize @user
+    @user.destroy
+    redirect_to root_path
   end
 
 end
