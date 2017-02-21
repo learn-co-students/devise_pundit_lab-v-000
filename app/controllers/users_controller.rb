@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by(id: params[:id])
     if authorize @user
-      @user.update(permitted_attributes)
+      @user.update(permitted_attributes(@user))
       redirect_to user_path(@user)
     else
       redirect_to '/'
