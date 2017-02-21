@@ -1,7 +1,18 @@
 class UserPolicy < ApplicationPolicy
 
-  # def update?
-  #   user.admin? || user.moderator? || record.try(:user) == user
-  # end
+  def index?
+    user.admin? || user.moderator?
+  end
 
+  def show?
+    user.admin? || user.moderator? || record == user
+  end
+
+  def update?
+    user.admin?
+  end
+
+  def destroy?
+    user.admin?
+  end
 end
