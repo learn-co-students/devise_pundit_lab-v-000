@@ -64,6 +64,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'test'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
