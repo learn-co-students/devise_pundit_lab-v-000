@@ -1,3 +1,6 @@
 <h1>Welcome</h1>
 <%= render @notes %>
+<% @notes.each do |n| %>
+  <%= link_to n.content, n %>
+<% end %>
 

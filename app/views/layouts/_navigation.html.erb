@@ -6,4 +6,6 @@
 
 <%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %>
 
+<%= link_to 'New Note', new_note_path %>
+
 <%= current_user.email if current_user %>
