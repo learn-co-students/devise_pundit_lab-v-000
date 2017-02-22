@@ -58,12 +58,14 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
 end
 
 group :test do
+  gem 'test'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'

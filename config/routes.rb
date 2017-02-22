@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  resources :users, only: [:index, :show, :edit]
+  resources :notes, only: [:show, :edit, :new, :create]
   root 'notes#index'
 
   # Example of regular route:
