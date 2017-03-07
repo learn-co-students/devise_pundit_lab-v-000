@@ -28,6 +28,7 @@ class NotesController < ApplicationController
     if current_user
       @notes = current_user.readable
     end
+    authorize @notes
   end
 
   private
