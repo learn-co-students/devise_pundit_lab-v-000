@@ -6,4 +6,15 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :viewers
   has_many :readable, through: :viewers, source: :note
+
+  enum role: [:user, :moderator, :admin]  
+  before_create :set_default_role
+
+
+  private
+  
+  def set_default_role
+  	self.role ||= Role.find_by_name('user')
+  end
+
 end
