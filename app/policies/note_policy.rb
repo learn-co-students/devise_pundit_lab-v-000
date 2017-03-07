@@ -1,6 +1,6 @@
 require 'pry'
 
-class UserPolicy < ApplicationPolicy
+class NotePolicy < ApplicationPolicy
     
     def index?
         user.admin?
@@ -21,4 +21,5 @@ class UserPolicy < ApplicationPolicy
     def destroy?
         user.admin?
     end
+    
 end

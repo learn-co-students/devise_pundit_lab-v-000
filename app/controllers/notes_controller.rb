@@ -1,26 +1,30 @@
 class NotesController < ApplicationController
   
   def new
-    
+    # authorize @notes
   end
   
   def create
+    # authorize @notes
     note = Note.new(note_params)
     note.user = current_user
     note.save!
-    redirect_to '/'
+    # authorize @notes
   end
 
   def update
+    # authorize @notes
     @note.update(note_params)
     redirect_to '/'    
   end
   
   def edit
     @note = Note.find(params[:id])
+    # authorize @notes
   end
   
   def show
+    # authorize @notes
   end
 
   def index
@@ -28,7 +32,7 @@ class NotesController < ApplicationController
     if current_user
       @notes = current_user.readable
     end
-    authorize @notes
+    # authorize @notes
   end
 
   private
@@ -36,4 +40,9 @@ class NotesController < ApplicationController
   def note_params
     params.require(:note).permit(:content, :visible_to)
   end
+  
+  # def authorize_note
+  #   authorize current_user
+  # end
+  
 end
