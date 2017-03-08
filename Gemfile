@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'poltergeist'
+gem 'phantomjs'
+gem 'pry-rails'
+# gem 'learn-co'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
 # Use sqlite3 as the database for Active Record
@@ -49,7 +53,7 @@ gem 'pundit'
 gem 'sqlite3'
 
 group :development do
-  gem 'better_errors'
+  # gem 'better-errors'
   gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
