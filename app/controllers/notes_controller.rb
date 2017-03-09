@@ -1,7 +1,8 @@
 class NotesController < ApplicationController
   
   def new
-    # authorize @notes
+    @note = Note.new
+    authorize @note
   end
   
   def create
@@ -9,6 +10,8 @@ class NotesController < ApplicationController
     @note.user = current_user
     @note.save!
     authorize @note
+    flash[:notice] = "Your note was created."
+    redirect_to '/' 
   end
 
   def update
@@ -20,7 +23,6 @@ class NotesController < ApplicationController
   end
   
   def edit
-    # binding.pry
     @note = Note.find(params[:id])
     if !policy(@note).edit?
       redirect_to '/'
@@ -28,7 +30,10 @@ class NotesController < ApplicationController
   end
   
   def show
-    authorize @note
+    @note = Note.find(params[:id])
+    if !policy(@note).show?
+      redirect_to '/'
+    end
   end
 
   def index
@@ -43,9 +48,5 @@ class NotesController < ApplicationController
   def note_params
     params.require(:note).permit(:content, :visible_to)
   end
-  
-  # def authorize_note
-  #   authorize current_user
-  # end
   
 end

@@ -2,16 +2,20 @@ require 'pry'
 
 class NotePolicy < ApplicationPolicy
     
+  def new?
+    true
+  end
+
+  def create?
+    true
+  end
+
   def index?
     user.admin? || user.moderator? 
   end
     
   def show?
     user.admin? || user.moderator? || record.try(:readers).include?(user)    
-  end
-    
-  def create?
-    true
   end
     
   def edit?
