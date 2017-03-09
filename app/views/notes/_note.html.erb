@@ -1,3 +1,5 @@
+<% @notes.each do |note| %>
+
 <div class=note>
   <div class=note-content>
     <%= note.content %>
@@ -6,3 +8,5 @@
     <%= note.user.name %>
   </div>
 </div>
+
+<% end %>

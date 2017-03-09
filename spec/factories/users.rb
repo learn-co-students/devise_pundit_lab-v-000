@@ -1,4 +1,6 @@
-FactoryGirl.define do
+require 'pry'
+
+FactoryGirl.define do 
   factory :user do
     confirmed_at Time.now
     name "Test User"
@@ -9,5 +11,8 @@ FactoryGirl.define do
       role 'admin'
     end
 
+    trait :moderator do
+      role 'moderator'
+    end
   end
 end
