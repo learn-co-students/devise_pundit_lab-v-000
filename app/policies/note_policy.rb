@@ -2,24 +2,28 @@ require 'pry'
 
 class NotePolicy < ApplicationPolicy
     
-    def index?
-        user.admin?
-    end
+  def index?
+    user.admin? || user.moderator? 
+  end
     
-    def show?
-        user.admin? || record == user
-    end
+  def show?
+    user.admin? || user.moderator? || record.try(:readers).include?(user)    
+  end
     
-    def create?
-        true
-    end
+  def create?
+    true
+  end
     
-    def update?
-        user.admin?
-    end
+  def edit?
+    user.admin? || record.try(:user) == user
+  end
+
+  def update?
+    user.admin? || record.try(:user) == user
+  end
     
-    def destroy?
-        user.admin?
-    end
+  def destroy?
+    user.admin? || record.try(:user) == user
+  end
     
 end

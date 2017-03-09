@@ -8,15 +8,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    # binding.pry
     if !current_user.admin? && current_user.id != params[:id].to_i
-        flash[:alert] = "Access denied."
-        redirect_to '/'
+      flash[:alert] = "Access denied."
+      redirect_to '/'
     end
   end
 
   def create
-    User.find_or_create_by(user_params(:name))
+    User.find_or_create_by(user_params(:email))
   end
 
   def destroy
