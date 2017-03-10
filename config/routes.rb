@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
+
+  scope :admin do
+    resources :users, exclude: [:show]
+  end
+
+  get '/users_page/:id', to: 'users#show'
+  get '/about', to: 'static#about'
+
   devise_for :users
+  resources :notes
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'notes#index'
+  root 'static#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
