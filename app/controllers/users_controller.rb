@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.all
-    #authorize User
+    @user = current_user
+    authorize User
   end
 
   def show

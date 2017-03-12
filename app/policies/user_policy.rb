@@ -1,31 +1,26 @@
 class UserPolicy < ApplicationPolicy
-  # class Scope < Scope
-  #   def resolve
-  #     scope
-  #   end
-  # end
 
-  attr_reader :current_user, :user
+  attr_reader :current_user, :model
 
-  def initialize(current_user, user)
+  def initialize(current_user, model)
     @current_user = current_user
-    @user = user
+    @user = model
   end
 
   def index?
-    @current_user.admin?
+    @current_user.admin? || @current_user = current_user
   end
 
   def show?
-    @current_user.admin? or @current_user == @user
+    @current_user.admin? || @current_user == current_user
   end
 
   def update?
-    @current_user.admin?
+    @current_user.admin? || @current_user == current_user
   end
 
   def destroy?
     return false if @current_user == @user
-    @current_user.admin?
+    @current_user.admin? || @current_user == current_user
   end
 end
