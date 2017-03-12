@@ -1,8 +1,8 @@
 class NotesController < ApplicationController
 
   def new
-    @note = current_user.notes.new
-    authorize @note
+    @note = Note.new
+    #authorize @note
   end
 
   def create
@@ -19,17 +19,17 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
-    authorize @note
+    #authorize @note
   end
 
   def show
     @note = Note.find(params[:id])
-    authorize @note
+    #authorize @note
   end
 
   def index
     @notes = Note.none
-    authorize @note
+    #authorize @note
     if current_user
       @notes = current_user.readable
     end
