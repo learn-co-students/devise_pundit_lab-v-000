@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  resources :users
+  get 'pages/about', to: 'static#about'
   root 'notes#index'
 
   # Example of regular route:
