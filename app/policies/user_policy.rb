@@ -8,15 +8,15 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    @current_user.admin? || @current_user = current_user
+    @current_user.admin? || @current_user = @user
   end
 
   def show?
-    @current_user.admin? || @current_user == current_user
+    @current_user.admin? || @current_user == @user
   end
 
   def update?
-    @current_user.admin? || @current_user == current_user
+    @current_user.admin? || @current_user == @user
   end
 
   def destroy?

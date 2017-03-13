@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    authorize User
+    authorize @user
   end
 
   def show
