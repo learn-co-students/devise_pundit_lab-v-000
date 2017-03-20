@@ -1,11 +1,18 @@
 class UserPolicy < ApplicationPolicy
 
+  attr_reader :user, :record
+
+  def initialize(user, record)
+    @user = user
+    @record = record
+  end
+
   def index?
     user.admin?
   end
 
   def show?
-    user.admin? || record.try(:user) == user
+    user.admin? || record == user
   end
 
   def update?
@@ -13,7 +20,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    user.admin? && record != user
   end
 
 end
