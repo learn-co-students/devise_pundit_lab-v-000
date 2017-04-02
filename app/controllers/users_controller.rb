@@ -1,23 +1,28 @@
 class UsersController < ApplicationController
-  before_action :set_user!, except: [:index, :new, :create]
+
 
   def index
-    binding.pry
+    @user = current_user
+    authorize @user
     @users = User.all
   end
 
   def show
-    #unless @user.id == current_user.id || current_user.admin?
-    #  redirect_to root_path
-    #  flash[:notice] = "Access denied."
-    authorize @user
-    end
-  end
-
-  private
-
-  def set_user!
     @user = User.find(params[:id])
+    authorize @user
   end
+
+  def update
+    authorize @user
+  end
+
+  def destroy
+    @user = User.find_by(id: params[:id])
+    authorize @user
+    @user.destroy
+    redirect_to home_path
+  end
+
+
 
 end
