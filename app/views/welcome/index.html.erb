@@ -1,0 +1,7 @@
+<h1>Welcome<h1>
+<h2>What would you like to do?</h2>
+<p><%=link_to "New Note", new_note_path%></p>
+<p><%=link_to "Manage Notes", notes_path%></p>
+<%if current_user.admin?%>
+<%=link_to "Manage Users", users_path%>
+<%end%>
