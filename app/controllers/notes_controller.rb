@@ -35,6 +35,12 @@ class NotesController < ApplicationController
         end
     end
 
+    def destroy
+        @note = Note.find(params[:id])
+        authorize @note
+        @note.destroy
+        redirect_to notes_path
+    end
     private
 
     def note_params

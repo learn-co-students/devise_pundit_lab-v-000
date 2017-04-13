@@ -16,10 +16,13 @@ class UserPolicy < ApplicationPolicy
     def index?
         @user.admin?
     end
+    def edit?
+        @user.admin? || @user == @user_model
+    end
     def update?
-       @user.admin? 
+        @user.admin? || @user == @user_model 
     end
     def destroy?
-        @user.admin? || @user == @user_model 
+        @user.admin? 
     end
 end

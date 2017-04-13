@@ -2,7 +2,8 @@
   <div class=note-content>
     <%= note.content %>
   </div>
-  <%= link_to "edit", edit_note_path(note)%>
+  <%= link_to "edit", edit_note_path(note) if note.user == current_user%> 
+
   <div class=note-author>
     <%= note.user.name %>
   </div>
