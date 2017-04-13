@@ -1,1 +1,4 @@
 <%= render :partial => 'form', :locals => {note: @note} %>
+<%= form_tag note_path(@note), method:"delete" do %>
+<%= submit_tag "Delete Note" %>
+<% end %>

@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+.note-content {
+    font-size: 1.3em
+}
+.note-author {
+    font-family: cursive
+}
