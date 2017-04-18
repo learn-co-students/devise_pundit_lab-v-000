@@ -2,6 +2,8 @@ class Users::SessionsController < Devise::SessionsController
   before_filter :configure_sign_in_params, only: [:create]
   before_action :authenticate_user!
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   # GET /resource/sign_in
   # def new
   #   super
@@ -13,7 +15,8 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def show
-    @user = current_user
+    @user = User.find_by(id: params[:format].to_i)
+    authorize @user
     render 'users/show'
   end
 
@@ -43,4 +46,16 @@ class Users::SessionsController < Devise::SessionsController
   def configure_sign_in_params
     devise_parameter_sanitizer.for(:sign_in) << :attribute
   end
+
+private
+
+  def user_not_authorized
+    flash[:alert] = "Access denied."
+    redirect_to users_path
+
+    # return head(:forbidden)
+    # flash[:alert] = "You are not authorized to perform this action."
+    # redirect_to root_path, alert: "Access denied."
+  end
+
 end
