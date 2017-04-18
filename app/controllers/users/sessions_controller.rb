@@ -7,6 +7,16 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def index
+    @user = current_user
+    render 'users/index'
+  end
+
+  def show
+    @user = current_user
+    render 'users/show'
+  end
+
   # POST /resource/sign_in
   def create
     if user_signed_in?
