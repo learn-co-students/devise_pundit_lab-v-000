@@ -1,9 +1,14 @@
 <h1>Notes Index</h1>
 
+<h1>Welcome</h1>
+
 <% if flash[:notice] %>
    <div class="notice"><%= flash[:notice] %></div>
  <% end %>
 
 <%= render @notes %>
 
+<%= link_to "Home",     root_path %><br />
+<%= link_to "Sign in",  new_user_session_path %><br />
+<%= link_to "Sign up",  new_user_registration_path %><br />
 <%= link_to "Sign out", destroy_user_session_path, method: :delete %><br>

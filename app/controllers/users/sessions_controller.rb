@@ -11,6 +11,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def index
     @user = current_user
+    authorize @user
     render 'users/index'
   end
 
@@ -51,11 +52,7 @@ private
 
   def user_not_authorized
     flash[:alert] = "Access denied."
-    redirect_to users_path
-
-    # return head(:forbidden)
-    # flash[:alert] = "You are not authorized to perform this action."
-    # redirect_to root_path, alert: "Access denied."
+    redirect_to '/pages/about'
   end
 
 end
