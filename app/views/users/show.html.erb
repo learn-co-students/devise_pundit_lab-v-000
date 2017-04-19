@@ -1,0 +1,7 @@
+<h1>User</h1>
+
+<% if flash[:alert] %>
+   <div class="alert"><%= flash[:alert] %></div>
+ <% end %>
+
+<p><%= @user.email %></p>
