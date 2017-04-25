@@ -2,6 +2,7 @@ class NotesController < ApplicationController
 
   def index
     @notes = Note.all
+    authorize @notes
   end
 
   def new
@@ -10,21 +11,25 @@ class NotesController < ApplicationController
 
   def create
     note = Note.new(note_params)
+    authorize note
     note.user = current_user
     note.save!
     redirect_to '/'
   end
 
   def update
+    authorize @note
     @note.update(note_params)
     redirect_to '/'
   end
 
   def edit
     @note = Note.find(params[:id])
+    authorize @note
   end
 
   def show
+    authorize @note
   end
 
   def index
@@ -33,6 +38,14 @@ class NotesController < ApplicationController
       @notes = current_user.readable
     end
   end
+
+  def destroy
+    @note = Note.find(params[:id])
+    authorize @note
+    @note.destroy
+    redirect_to notes_path
+  end
+
 
   private
 
