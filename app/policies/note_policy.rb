@@ -13,7 +13,7 @@ class NotePolicy < ApplicationPolicy
   end
 
   def index?
-    user == record || user.admin? || user.moderator?
+    user_or_admin || user.moderator?
   end
 
   def update?
@@ -21,7 +21,7 @@ class NotePolicy < ApplicationPolicy
   end
 
   def show?
-    user == record || user.admin? || user.moderator?
+    user_or_admin || user.moderator?
   end
 
   private
