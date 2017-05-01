@@ -1,8 +1,15 @@
-<div class=note>
-  <div class=note-content>
+<div class="note">
+  <div class="note-content">
     <%= note.content %>
   </div>
-  <div class=note-author>
+  <div class="note-author">
     <%= note.user.name %>
+  </div>
+  <div class="note-readers">
+    <ul>
+      <% note.readers.each do |reader| %>
+        <li><%= reader.name if reader.name != "" %></li>
+      <% end %>
+    </ul>
   </div>
 </div>
