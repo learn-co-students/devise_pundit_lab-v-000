@@ -1,10 +1,5 @@
 class NotesController < ApplicationController
 
-  def index
-    @notes = Note.all
-    authorize @notes
-  end
-
   def new
 
   end

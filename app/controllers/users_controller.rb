@@ -15,4 +15,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find_by(id: params[:id])
+    redirect_to edit_user_registration_path(@user)
+  end
+
+  def destroy
+    redirect_to root_path
+  end
+
 end
