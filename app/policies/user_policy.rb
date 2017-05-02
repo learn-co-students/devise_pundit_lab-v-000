@@ -1,16 +1,21 @@
 class UserPolicy < ApplicationPolicy
 
+
   def index?
-    user.admin?
+    user.admin? || record == user
   end
 
   def show?
-    user.admin? ||
+    user.admin? || record == user
   end
+    
 
   def update?
-    user.admin? || record.try(:user) == user
+    user.admin?
+   end
 
+   def destroy?
+     user.admin?
    end
 
 end
