@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  
+  before_action :set_note!, only: [:update, :edit, :show]
   def new
     
   end
@@ -30,7 +30,14 @@ class NotesController < ApplicationController
     end
   end
 
+  def about
+  end 
+
   private
+
+  def set_note!
+     @note = Note.find(params[:id])
+  end
 
   def note_params
     params.require(:note).permit(:content, :visible_to)
