@@ -50,15 +50,15 @@ describe NotePolicy do
   end
 
   permissions :remove_viewer? do
-    it "allows removing viewers to notes owned by them" do
+    it "allows removing viewers from notes owned by them" do
       note.user = owner
       expect(subject).to permit(owner, note)
     end
-    it "prevents removing viewers to notes not owned by them" do
+    it "prevents removing viewers from notes not owned by them" do
       note.user = other_user
       expect(subject).not_to permit(owner, note)
     end
-    it "allows admin to remove viewers to notes not owned by them" do
+    it "allows admin to remove viewers from notes not owned by them" do
       note.user = other_user
       expect(subject).to permit(admin, note)
     end
@@ -72,6 +72,10 @@ describe NotePolicy do
     it "allows you to see your own note" do
       note.user = owner
       expect(subject).to permit(owner, note)
+    end
+    it 'allows you to see notes you are a viewer of' do
+      note.readers << other_user
+      expect(subject).to permit(other_user, note)
     end
     it "allows an moderator to see any note" do
       expect(subject).to permit(moderator)

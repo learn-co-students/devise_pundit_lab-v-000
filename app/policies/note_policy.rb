@@ -18,7 +18,10 @@ class NotePolicy < ApplicationPolicy
   end
 
   def show?
-     @user.admin? || @user.moderator? || @user.id == @note.user.id
+    return true if @user.admin? || @user.moderator? || @user == @note.user
+    if @note.readers
+      @note.readers.any? {|user| @user.id == user.id }
+    end
   end
 
   def update?
