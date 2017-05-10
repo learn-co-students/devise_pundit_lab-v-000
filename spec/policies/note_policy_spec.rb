@@ -8,7 +8,7 @@ describe NotePolicy do
   let (:moderator) { FactoryGirl.build_stubbed :user, :moderator }
   let (:admin) { FactoryGirl.build_stubbed :user, :admin }
 
-  permissions :create do
+  permissions :create? do
     it "allows creation of notes owned by them" do
       note.user = owner
       expect(subject).to permit(owner, note)
@@ -19,7 +19,7 @@ describe NotePolicy do
     end
   end
 
-  permissions :update do
+  permissions :update? do
     it "allows editing of notes owned by them" do
       note.user = owner
       expect(subject).to permit(owner, note)
@@ -34,7 +34,7 @@ describe NotePolicy do
     end
   end
 
-  permissions :add_viewer do
+  permissions :add_viewer? do
     it "allows adding viewers to notes owned by them" do
       note.user = owner
       expect(subject).to permit(owner, note)
@@ -49,7 +49,7 @@ describe NotePolicy do
     end
   end
 
-  permissions :remove_viewer do
+  permissions :remove_viewer? do
     it "allows removing viewers to notes owned by them" do
       note.user = owner
       expect(subject).to permit(owner, note)

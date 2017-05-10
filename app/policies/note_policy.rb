@@ -5,16 +5,27 @@ class NotePolicy < ApplicationPolicy
     @note = note
   end
 
+  def create?
+    @note.user == @user
+  end
+
+  def add_viewer?
+    @user.admin? || @user == @note.user
+  end
+
+  def remove_viewer?
+    @user.admin? || @user == @note.user
+  end
+
   def show?
      @user.admin? || @user.moderator? || @user.id == @note.user.id
   end
 
   def update?
-    @user.admin?
+    @user.admin? || @user == @note.user
   end
 
   def destroy?
-    return true if(@user == @note.user)
-    @user.admin?
+    @user.admin? || @user == @note.user
   end
 end
