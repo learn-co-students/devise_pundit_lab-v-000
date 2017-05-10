@@ -9,5 +9,13 @@ FactoryGirl.define do
       role 'admin'
     end
 
+    trait :moderator do
+      role 'moderator'
+    end
+
+  end
+
+  factory :note do
+    content "This is a very secret note!"
   end
 end
