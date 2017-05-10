@@ -1,4 +1,13 @@
 class NotePolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      if user.admin? || user.moderator?
+        scope.all
+      else
+        scope.include(:readers).where("reader_id == user_id")
+      end
+    end
+  end
 
   def initialize(user, note)
     @user = user
@@ -9,11 +18,11 @@ class NotePolicy < ApplicationPolicy
     @note.user == @user
   end
 
-  def add_viewer?
+  def add_reader?
     @user.admin? || @user == @note.user
   end
 
-  def remove_viewer?
+  def remove_reader?
     @user.admin? || @user == @note.user
   end
 
