@@ -1,8 +1,14 @@
 <div class=note>
+  <%= note.id %>
   <div class=note-content>
-    <%= note.content %>
+    <%= link_to note.content, note_path(note) %>
   </div>
+  <br />
   <div class=note-author>
-    <%= note.user.name %>
+    by <%= note.user.name %>
+  </div>
+  <div>
+    <%= "visible to #{note.visible_to}" %>
   </div>
 </div>
+<br />

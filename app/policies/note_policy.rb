@@ -4,7 +4,7 @@ class NotePolicy < ApplicationPolicy
       if user.admin? || user.moderator?
         scope.all
       else
-        scope.include(:readers).where("reader_id == user_id")
+        user.readable
       end
     end
   end
@@ -12,6 +12,10 @@ class NotePolicy < ApplicationPolicy
   def initialize(user, note)
     @user = user
     @note = note
+  end
+
+  def new?
+    true
   end
 
   def create?
@@ -31,6 +35,10 @@ class NotePolicy < ApplicationPolicy
     if @note.readers
       @note.readers.any? {|user| @user.id == user.id }
     end
+  end
+
+  def edit?
+    @user.admin? || @user == @note.user
   end
 
   def update?

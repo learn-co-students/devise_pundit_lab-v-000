@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   root 'notes#index'
 
   get '/goodbye' => 'application#goodbye'
+  get '/forbidden' => 'application#forbidden'
   resources :users, only: [:index, :show]
+  resources :notes
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

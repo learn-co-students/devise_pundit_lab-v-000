@@ -1,0 +1,4 @@
+<%= render @note %>
+
+<%= link_to("Edit", edit_note_path(@note)) %>
+<%= link_to("Delete", "/notes/#{@note.id}", method: "delete") %>
