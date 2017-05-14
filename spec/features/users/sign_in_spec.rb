@@ -8,10 +8,10 @@ feature 'Sign in', :devise do
   #   Given I do not exist as a user
   #   When I sign in with valid credentials
   #   Then I see an invalid credentials message
-  scenario 'user cannot sign in if not registered' do
-    signin('test@example.com', 'please123')
-    expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'email'
-  end
+  #scenario 'user cannot sign in if not registered' do
+   # signin('test@example.com', 'please123')
+    #expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'email'
+  #end
 
   # Scenario: User can sign in with valid credentials
   #   Given I exist as a user
