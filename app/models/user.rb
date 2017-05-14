@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :validatable
 
-  enum roles: [:normal, :moderator, :admin]
-  
+  enum role: [:normal, :moderator, :admin]
+
   has_many :notes
   has_many :viewers
   has_many :readable, through: :viewers, source: :note
