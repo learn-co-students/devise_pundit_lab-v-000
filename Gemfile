@@ -41,7 +41,7 @@ group :development, :test do
   gem 'spring'
 end
 
-
+gem 'pry'
 gem 'devise'
 gem 'devise_invitable'
 gem 'high_voltage'
