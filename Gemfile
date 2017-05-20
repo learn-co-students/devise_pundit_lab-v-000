@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'learn-co'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
 # Use sqlite3 as the database for Active Record
@@ -64,6 +65,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'pry'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
