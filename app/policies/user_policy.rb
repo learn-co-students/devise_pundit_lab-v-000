@@ -1,5 +1,7 @@
 class UserPolicy < ApplicationPolicy
 
+  require 'pry'
+
   def index?
     user.admin?
   end

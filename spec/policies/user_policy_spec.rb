@@ -1,5 +1,6 @@
 describe UserPolicy do
   subject { UserPolicy }
+  require 'pry'
 
   let (:current_user) { FactoryGirl.build_stubbed :user }
   let (:other_user) { FactoryGirl.build_stubbed :user }
@@ -37,6 +38,7 @@ describe UserPolicy do
 
   permissions :destroy? do
     it "prevents deleting yourself" do
+      binding.pry
       expect(subject).not_to permit(current_user, current_user)
     end
     it "allows an admin to delete any user" do
