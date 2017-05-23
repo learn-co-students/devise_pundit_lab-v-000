@@ -1,6 +1,10 @@
 class UserPolicy < ApplicationPolicy
-
-  require 'pry'
+  attr_reader :user, :note
+  
+  # def initialize(user, note)
+  #   @user = user
+  #   @note = note
+  # end
 
   def index?
     user.admin?
