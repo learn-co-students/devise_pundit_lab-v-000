@@ -9,5 +9,13 @@ FactoryGirl.define do
       role 'admin'
     end
 
+    trait :moderator do
+      role 'moderator'
+    end
+
+    trait :reader do
+      role 'reader'
+    end
+
   end
 end
