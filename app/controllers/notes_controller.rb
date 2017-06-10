@@ -25,8 +25,8 @@ class NotesController < ApplicationController
 
   def index
     @notes = Note.none
-    if current_user
-      @notes = current_user.readable
+    if @user = current_user
+      @notes = @user.readable
     end
   end
 
