@@ -48,6 +48,11 @@ gem 'high_voltage'
 gem 'pundit'
 gem 'sqlite3'
 
+gem 'pry'
+
+#instructor said to include this driver
+gem 'poltergeist'
+
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
