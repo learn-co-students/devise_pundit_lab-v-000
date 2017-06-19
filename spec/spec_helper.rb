@@ -40,6 +40,10 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  # instructior said to switch to this driver
+  require 'capybara/poltergeist'
+  Capybara.javascript_driver = :poltergeist
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
