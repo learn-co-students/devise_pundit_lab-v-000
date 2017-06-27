@@ -1,0 +1,6 @@
+<h1>Welcome</h1>
+
+<% if @user.present? %>
+    <h1>User: <%= @user.name %> </h1>
+    <h2>Email: <%= @user.email %> </h2>
+<% end %>
