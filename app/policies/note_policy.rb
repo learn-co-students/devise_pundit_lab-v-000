@@ -1,0 +1,3 @@
+class NotePolicy < ApplicationPolicy
+  
+end
