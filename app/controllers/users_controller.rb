@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_after_action :verify_policy_scoped, except: :index
+  # skip_after_action :verify_policy_scoped, except: :index
 
   def show
     @user = User.find_by(id: params[:id])

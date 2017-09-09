@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  after_action :verify_policy_scoped
-  after_action :verify_authorized
+  # after_action :verify_policy_scoped
+  # after_action :verify_authorized
 
   private
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
+    flash[:alert] = "Access denied."
     redirect_to root_path
   end
 end
