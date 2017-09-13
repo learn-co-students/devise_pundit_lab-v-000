@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   has_many :readable, through: :viewers, source: :note
 
   enum role: [:normal, :moderator, :admin]
+
 end
