@@ -6,7 +6,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    authorize @user
+    if !authorize @user
+      flash[:error] = "Access denied."
+    end
   end
 
   def edit
