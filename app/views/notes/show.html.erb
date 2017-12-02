@@ -1,0 +1,7 @@
+<%= @note.content %>
+<% if policy(@note).update? %>
+  <%= link_to "Edit note", edit_note_path(@note) %>
+<% end %>
+<% if policy(@note).destroy? %>
+  <%= link_to "Delete note", note_path(@note), method: :delete %>
+<% end %>

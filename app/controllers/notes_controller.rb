@@ -12,8 +12,9 @@ class NotesController < ApplicationController
   end
 
   def update
+    @note = Note.find(params[:id])
     @note.update(note_params)
-    redirect_to '/'    
+    redirect_to '/'
   end
   
   def edit
@@ -21,6 +22,7 @@ class NotesController < ApplicationController
   end
   
   def show
+    @note = Note.find(params[:id])
   end
 
   def index
@@ -28,6 +30,12 @@ class NotesController < ApplicationController
     if current_user
       @notes = current_user.readable
     end
+  end
+
+  def destroy
+    @note = Note.find(params[:id])
+    @note.destroy
+    redirect_to '/'
   end
 
   private
