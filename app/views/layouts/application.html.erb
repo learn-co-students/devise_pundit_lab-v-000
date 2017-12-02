@@ -8,6 +8,14 @@
 </head>
 <body>
   
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  
+  <%= link_to 'Home', root_path %><br>
+  <%= link_to 'Sign up', new_user_registration_path %><br>
+  <%= link_to 'Sign in', new_user_session_path %><br>
+  <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %><br>
+
 <%= yield %>
 
 </body>
