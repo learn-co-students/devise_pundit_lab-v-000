@@ -1,0 +1,9 @@
+
+<%= link_to "Sign up", new_user_registration_path %><br />
+<% if current_user %>
+  <h1>Hello,<%= current_user.email %></h1>
+<% else %>
+  <%= link_to "Sign in", new_user_session_path %><br />
+<% end %>
+<%= link_to "Sign out", destroy_user_session_path, :method => "delete" %>
+<%= link_to "Home", root_path %>
