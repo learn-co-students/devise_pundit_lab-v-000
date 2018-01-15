@@ -1,0 +1,5 @@
+<h1>User <%= @user.email %></h1>
+
+<% if policy(@user).update? %>
+  <%= link_to "Edit", edit_user_path %>
+<% end %>
