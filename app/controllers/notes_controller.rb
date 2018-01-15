@@ -1,12 +1,16 @@
 class NotesController < ApplicationController
+
+  # skip_after_action :verify_authorized
+  # skip_after_action :verify_policy_scoped
   
   def new
-    
+    authorize Note.new
   end
   
   def create
     note = Note.new(note_params)
     note.user = current_user
+    authorize note
     note.save!
     redirect_to '/'
   end
