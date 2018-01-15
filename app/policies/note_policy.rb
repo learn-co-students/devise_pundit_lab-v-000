@@ -1,17 +1,18 @@
-class UserPolicy < ApplicationPolicy
-  def index?
-    user.admin?
-  end
+class NotePolicy < ApplicationPolicy
 
+
+
+  def index?
+    !user.moderator?
+  end
   def show?
     record == user || user.admin?
   end
-
   def update?
     record == user || user.admin?
   end
 
   def destroy?
-    user.admin? && (record != user)
+    record == user || user.admin?
   end
 end
