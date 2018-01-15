@@ -10,4 +10,8 @@ describe User do
     expect(@user.email).to match 'user@example.com'
   end
 
+  it "has a role that defaults to user" do
+  	expect(@user.role).to match "user"
+  end
+
 end
