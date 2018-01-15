@@ -6,9 +6,13 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+<header>
+  <%= render 'layouts/navigation_links' %>
+</header>
 <body>
-  
-<%= yield %>
+  <%= render 'layouts/messages' %>
+  <%= link_to("Sign out", destroy_user_session_path, :method => :delete) %>
+  <%= yield %>
 
 </body>
 </html>
