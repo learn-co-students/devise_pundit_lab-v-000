@@ -3,6 +3,7 @@
     <%= note.content %>
   </div>
   <div class=note-author>
-    <%= note.user.name %>
+    <%= note.user.name if note.user%>
   </div>
+  <%= link_to "Delete", note_path(note), method: "DELETE" %>
 </div>
