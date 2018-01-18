@@ -1,9 +1,11 @@
 class NotesController < ApplicationController
-  
+  before_action :authenticate_user!
+  before_action :find_note, except: [:index, :new, :create]
+
   def new
-    
+    @note = Note.new
   end
-  
+
   def create
     note = Note.new(note_params)
     note.user = current_user
@@ -13,13 +15,12 @@ class NotesController < ApplicationController
 
   def update
     @note.update(note_params)
-    redirect_to '/'    
+    redirect_to '/'
   end
-  
+
   def edit
-    @note = Note.find(params[:id])
   end
-  
+
   def show
   end
 
@@ -31,6 +32,10 @@ class NotesController < ApplicationController
   end
 
   private
+
+  def find_note
+    @note = Note.find_by(params[:id])
+  end
 
   def note_params
     params.require(:note).permit(:content, :visible_to)
