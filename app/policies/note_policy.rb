@@ -1,4 +1,4 @@
-class UserPolicy < ApplicationPolicy
+class NotePolicy < ApplicationPolicy
 
   class Scope < UserPolicy
 
@@ -23,23 +23,24 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    @user.admin? || @record.try(:id) == @user.id
+    @user.admin? || @record.try(:user) == @user
   end
 
   def create?
-    @user.admin? || @record.try(:id) == @user.id
+    @user != nil
   end
 
   def show?
-    @user.admin? || @record.try(:id) == @user.id
+    @user.admin? || @user.moderator? || @record.readers.include?(@user)
   end
 
   def update?
-    @user.admin? || @record.try(:id) == @user.id
+    @user.admin? || @record.try(:user) == @user
   end
 
   def destroy?
-    @user.admin?
+    @user.admin? || @record.try(:user) == @user
   end
+
 
 end
