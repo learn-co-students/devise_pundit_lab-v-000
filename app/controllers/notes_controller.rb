@@ -13,7 +13,7 @@ class NotesController < ApplicationController
 
   def update
     @note.update(note_params)
-    redirect_to '/'    
+    redirect_to '/'
   end
   
   def edit
